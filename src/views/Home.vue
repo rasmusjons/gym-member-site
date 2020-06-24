@@ -1,18 +1,134 @@
 <template>
-  <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png" />
-    <HelloWorld msg="Welcome to Your Vue.js App" />
+  <div>
+    <b-jumbotron fluid class="jumbo" text-variant="white">
+      <h1 class="pulse">
+        SINCE YOU CAN'T BEAT US, <span class="pulse2"> JOIN US! </span>
+      </h1>
+
+      <hr class="my-4" />
+
+      <b-button
+        class="bokaButton"
+        variant="primary"
+        @click="$router.push('/boka')"
+        >Boka bana
+        <b-icon class="p-1" icon="calendar3" :display="{ status }"></b-icon
+      ></b-button>
+    </b-jumbotron>
+    <app-mainbody> </app-mainbody>
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
-import HelloWorld from "@/components/HelloWorld.vue";
+import AppMainbody from "@/components/Mainbody.vue";
 
 export default {
   name: "Home",
   components: {
-    HelloWorld
+    AppMainbody
   }
 };
 </script>
+
+<style lang="scss" scoped>
+@import "../styles/variables.scss";
+
+.pulse {
+  animation: pulse 5s;
+}
+
+@keyframes pulse {
+  0% {
+    color: black;
+  }
+  100% {
+    color: white;
+  }
+}
+.pulse2 {
+  animation: pulse 10s;
+}
+
+@keyframes pulse2 {
+  0% {
+    color: black;
+  }
+  80% {
+    color: black;
+  }
+  100% {
+    color: white;
+  }
+}
+
+.bokaButton {
+  opacity: 0;
+  animation: slide 1s forwards;
+  animation-delay: 3s;
+}
+
+@keyframes slide {
+  0% {
+    transform: translateX(-20%);
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateX(0%);
+  }
+}
+.jumbo {
+  background: -moz-radial-gradient(
+    center,
+    ellipse cover,
+    rgba(41, 41, 41, 1) 0%,
+    rgba(38, 38, 38, 1) 7%,
+    rgba(20, 20, 20, 1) 51%,
+    rgba(0, 0, 0, 1) 100%
+  ); /* ff3.6+ */
+  background: -webkit-gradient(
+    radial,
+    center center,
+    0px,
+    center center,
+    100%,
+    color-stop(0%, rgba(41, 41, 41, 1)),
+    color-stop(7%, rgba(38, 38, 38, 1)),
+    color-stop(51%, rgba(20, 20, 20, 1)),
+    color-stop(100%, rgba(0, 0, 0, 1))
+  ); /* safari4+,chrome */
+  background: -webkit-radial-gradient(
+    center,
+    ellipse cover,
+    rgba(41, 41, 41, 1) 0%,
+    rgba(38, 38, 38, 1) 7%,
+    rgba(20, 20, 20, 1) 51%,
+    rgba(0, 0, 0, 1) 100%
+  ); /* safari5.1+,chrome10+ */
+  background: -o-radial-gradient(
+    center,
+    ellipse cover,
+    rgba(41, 41, 41, 1) 0%,
+    rgba(38, 38, 38, 1) 7%,
+    rgba(20, 20, 20, 1) 51%,
+    rgba(0, 0, 0, 1) 100%
+  ); /* opera 11.10+ */
+  background: -ms-radial-gradient(
+    center,
+    ellipse cover,
+    rgba(41, 41, 41, 1) 0%,
+    rgba(38, 38, 38, 1) 7%,
+    rgba(20, 20, 20, 1) 51%,
+    rgba(0, 0, 0, 1) 100%
+  ); /* ie10+ */
+  background: radial-gradient(
+    ellipse at center,
+    rgba(41, 41, 41, 1) 0%,
+    rgba(38, 38, 38, 1) 7%,
+    rgba(20, 20, 20, 1) 51%,
+    rgba(0, 0, 0, 1) 100%
+  ); /* w3c */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#292929', endColorstr='#000000',GradientType=0 ); /* ie6-9 */
+}
+</style>

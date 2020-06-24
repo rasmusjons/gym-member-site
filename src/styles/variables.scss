@@ -1,0 +1,11 @@
+$theme-colors: (
+  "dark": black,
+  "bg-variant": black, 
+  "border-warning": rgb(247, 149, 0),
+
+);
+  $padelorange: rgb(247, 149, 0);
+
+
+  @import "node_modules/bootstrap/scss/bootstrap";
+
