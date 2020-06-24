@@ -95,7 +95,8 @@ export default {
   opacity: 0.9;
 }
 
-p {
-  line-height: 30px;
+.nav-pills .nav-link.active,
+.nav-pills .show > .nav-link {
+  background-color: $padelorange !important;
 }
 </style>

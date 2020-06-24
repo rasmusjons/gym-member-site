@@ -3,9 +3,12 @@ $theme-colors: (
   "bg-variant": black, 
   "border-warning": rgb(247, 149, 0),
 
+
+
 );
   $padelorange: rgb(247, 149, 0);
 
-
-  @import "node_modules/bootstrap/scss/bootstrap";
-
+// Bootstrap and its default variables
+@import '../../node_modules/bootstrap/scss/bootstrap';
+// BootstrapVue and its default variables
+@import '../../node_modules/bootstrap-vue/src/index.scss';
