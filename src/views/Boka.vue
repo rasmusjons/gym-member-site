@@ -3,6 +3,7 @@
     <b-row class="m-1 p-1">
       <b-col cols="12">
         <div>
+          <button @click="getClasses">getclasses</button>
           <label for="example-datepicker">Filtrera på datum</label>
 
           <b-form-datepicker
@@ -70,6 +71,7 @@ export default {
   methods: {
     getClasses() {
       //hämtar datum för valt datum samt plus tre dagar.
+      this.addThreeDays = true;
       if (this.addThreeDays) {
         const threeDays = 3;
         const dates = [];
@@ -78,7 +80,7 @@ export default {
         Date.prototype.addDays = function(days) {
           var date = new Date(this.valueOf());
           date.setDate(date.getDate() + days);
-          return date.getDate();
+          return date.toJSON();
         };
 
         var date = new Date(this.date);
@@ -87,7 +89,7 @@ export default {
         for (let index = 0; index <= threeDays; index++) {
           dates.push(date.addDays(index));
         }
-
+        console.log(dates);
         // göra fyra anrop.
         dates.forEach(date => {
           this.axios
