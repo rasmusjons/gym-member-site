@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <b-container fluid class="text-dark mt-4 p-4">
+  <div class="bg-dark rounded-top ">
+    <b-container fluid class="text-white mt-5 p-4 backgroundImage">
       <b-container>
         <b-row class="m-1 p-1">
           <b-col cols="12">
@@ -26,60 +26,68 @@
       </b-container>
     </b-container>
 
-    <b-container>
-      <b-row class="m-1 p-1">
-        <b-col cols="12">
-          <b-tabs content-class="mt-3" pills>
-            <b-tab title="Kommande bokningar" active>
-              <template v-slot:title>
-                <b-icon-calendar2-check> </b-icon-calendar2-check>
+    <b-container class="bg-light rounded-top" fluid>
+      <b-container>
+        <b-row class="m-1 p-1 pt-4">
+          <b-col cols="12">
+            <b-tabs content-class="mt-4" pills>
+              <b-tab active class="mt-1">
+                <template v-slot:title>
+                  <b-icon-calendar2-check> </b-icon-calendar2-check>
+                  <strong> Mina bokningar</strong>
+                </template>
+                <b-row
+                  class="m-1 p-1  bg-dark shadow-sm text-light rounded d-none d-sm-flex"
+                >
+                  <b-col md="3"><strong>Plats</strong></b-col>
+                  <b-col md="3"><strong>Datum/tid</strong></b-col>
+                  <b-col md="2"><strong>Bana</strong></b-col>
+                  <b-col md="2"><strong>Övrigt</strong></b-col>
+                  <b-col md="2"><strong></strong></b-col>
+                </b-row>
 
-                <strong> Mina bokningar</strong>
-              </template>
-              <b-row class="bg-light p-1 m-1 rounded d-none d-sm-flex">
-                <b-col md="3"><strong>Plats</strong></b-col>
-                <b-col md="3"><strong>Datum/tid</strong></b-col>
-                <b-col md="2"><strong>Bana</strong></b-col>
-                <b-col md="2"><strong>Övrigt</strong></b-col>
-                <b-col md="2"><strong></strong></b-col>
-              </b-row>
-
-              <b-row
-                v-for="singleClass in classes"
-                :key="singleClass.index"
-                class="bg-light p-1 m-1 rounded"
-              >
-                <b-col md="3" sm="1"
-                  ><p>{{ singleClass.club }}</p></b-col
+                <b-row
+                  v-for="singleClass in classes"
+                  :key="singleClass.index"
+                  class="bg-light border shadow-sm pt-1 m-1 rounded"
                 >
-                <b-col md="3" sm="1"
-                  ><p>{{ singleClass.date }}: {{ singleClass.time }}</p></b-col
-                >
-                <b-col md="2" sm="1"
-                  ><p>{{ singleClass.court }}</p></b-col
-                >
-                <b-col md="2" sm="1"></b-col>
-                <b-col md="2" sm="1">
-                  <p
-                    class="link"
-                    @click="
-                      onCancel(
-                        singleClass.club,
-                        singleClass.date,
-                        singleClass.time,
-                        singleClass.id
-                      )
-                    "
+                  <b-col md="3" sm="1"
+                    ><p>{{ singleClass.club }}</p></b-col
                   >
-                    <b-icon-trash></b-icon-trash> <span>Avboka </span>
-                  </p></b-col
-                >
-              </b-row>
-            </b-tab>
-            <b-tab title="Kvitton"><p>kvitton</p></b-tab>
-          </b-tabs>
-        </b-col>
-      </b-row>
+                  <b-col md="3" sm="1"
+                    ><p>
+                      {{ singleClass.date }}: {{ singleClass.time }}
+                    </p></b-col
+                  >
+                  <b-col md="2" sm="1"
+                    ><p>{{ singleClass.court }}</p></b-col
+                  >
+                  <b-col md="2" sm="1"></b-col>
+                  <b-col md="2" sm="1">
+                    <p
+                      class="link"
+                      @click="
+                        onCancel(
+                          singleClass.club,
+                          singleClass.date,
+                          singleClass.time,
+                          singleClass.id
+                        )
+                      "
+                    >
+                      <b-icon-trash></b-icon-trash> <span>Avboka </span>
+                    </p></b-col
+                  >
+                </b-row>
+              </b-tab>
+              <b-tab title="Kvitton" class="m-1">
+                <b-icon-calendar2-check> </b-icon-calendar2-check>
+                <strong>Kvitton</strong>
+              </b-tab>
+            </b-tabs>
+          </b-col>
+        </b-row>
+      </b-container>
     </b-container>
   </div>
 </template>
@@ -169,3 +177,9 @@ export default {
   }
 };
 </script>
+
+<style scoped>
+.bg-dark {
+  background-color: black !important;
+}
+</style>

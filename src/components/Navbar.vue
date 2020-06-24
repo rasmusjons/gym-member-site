@@ -38,9 +38,13 @@
                 <b-nav-item class="m-1" href="#">Kontakta oss</b-nav-item>
               </b-navbar-nav>
               <b-navbar-nav v-if="isAuthenticated">
-                <b-nav-item class="m-1" @click="$router.push('/dashboard')"
-                  >Min sida</b-nav-item
-                >
+                <b-nav-item class="m-1">
+                  <b-avatar
+                    button
+                    @click="$router.push('/dashboard')"
+                    variant="warning"
+                  ></b-avatar>
+                </b-nav-item>
               </b-navbar-nav>
               <b-navbar-nav v-if="isAuthenticated">
                 <b-nav-item class="m-1" @click="onLogout">Logga ut</b-nav-item>

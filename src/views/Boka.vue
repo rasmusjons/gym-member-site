@@ -10,6 +10,15 @@
             v-model="date"
             class="mb-2"
           ></b-form-datepicker>
+          <b-form-checkbox
+            id="checkbox-1"
+            v-model="addThreeDays"
+            name="checkbox-1"
+            value="true"
+            unchecked-value="false"
+          >
+            Sök flexibelt, 3 dagar efter.
+          </b-form-checkbox>
         </div>
       </b-col>
     </b-row>
@@ -23,7 +32,7 @@
           <b-button
             variant="primary"
             class="m-2"
-            :disabled="!isAuthenticated"
+            :disabled="isAuthenticated"
             @click="onPickTime(time)"
             >Time: {{ time }}
           </b-button>
@@ -46,7 +55,8 @@ export default {
       date: "",
       times: ["10:00-11:00", "11:00-12:00", "12:00-13:00"],
       time: "",
-      showBooking: false
+      showBooking: false,
+      addThreeDays: false
     };
   },
   computed: {
@@ -58,6 +68,49 @@ export default {
     }
   },
   methods: {
+    getClasses() {
+      //hämtar datum för valt datum samt plus tre dagar.
+      if (this.addThreeDays) {
+        const threeDays = 3;
+        const dates = [];
+
+        //lägger till en functino på Date-protoypen för datum X-dagar från ett annat datum.
+        Date.prototype.addDays = function(days) {
+          var date = new Date(this.valueOf());
+          date.setDate(date.getDate() + days);
+          return date.getDate();
+        };
+
+        var date = new Date(this.date);
+
+        //bygger ihop en datum lista med fyra datum.
+        for (let index = 0; index <= threeDays; index++) {
+          dates.push(date.addDays(index));
+        }
+
+        // göra fyra anrop.
+        dates.forEach(date => {
+          this.axios
+            .post("http://localhost:3002/users", date)
+            .then(response => {
+              console.log(response);
+            })
+            .catch(error => {
+              console.log(error);
+            });
+        });
+      } else {
+        //hämtar data för valt datum
+        this.axios
+          .post("http://localhost:3002/users", date)
+          .then(response => {
+            console.log(response);
+          })
+          .catch(error => {
+            console.log(error);
+          });
+      }
+    },
     onPickTime(time) {
       this.$bvModal
         .msgBoxConfirm(`Du vill boka: ${this.date} klockan ${time}`, {
