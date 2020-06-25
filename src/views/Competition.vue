@@ -1,41 +1,62 @@
 <template>
   <div>
     <b-container>
+      <b-row class="m-1 mt-4 p-1">
+        <b-col cols="12">
+          <b-img
+            src="http://www.padelcrew.se/wp-content/uploads/2014/10/arenor-bg-1024x363.jpg"
+            fluid
+            alt="Sponsor image"
+          ></b-img>
+        </b-col>
+      </b-row>
       <b-row class="m-1 p-1">
-        <b-col md="8">
-          <b-row class="mt-1 pt-1">
+        <b-col class="mt-1" md="8">
+          <b-row class="mt-1 pt-1s">
             <b-col md="12" sm="12">
+              <h1>Aktuella ligor</h1>
+
+              <b-button block class="mt-4 p-4" variant="primary"
+                >Helsingborg Padel League
+                <span> - Öppnas i nytt fönster</span></b-button
+              >
+              <b-button block class="mt-4 p-4" variant="primary"
+                >Helsingborg Ladies League
+                <span> - Öppnas i nytt fönster</span></b-button
+              >
+
               <div>
-                <b-embed
-                  type="iframe"
-                  allowfullscreen
-                  width="560"
-                  height="315"
-                  src="https://www.youtube.com/embed/zvIIVGV0Ci4"
-                  frameborder="0"
-                  allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-                ></b-embed>
+                <b-button v-b-toggle.sidebar-1 class="mt-4 p-2" variant="info"
+                  >Nyheter!</b-button
+                >
+                <b-sidebar id="sidebar-1" title="Nyheter" shadow>
+                  <div class="px-3 py-2">
+                    <AppNewsfeed></AppNewsfeed>
+                  </div>
+                </b-sidebar>
               </div>
+              <hr />
             </b-col>
           </b-row>
           <b-row class="mt-1 pt-1">
             <b-col md="12" sm="12">
               <h1>Info och spelregler</h1>
               <p>
-                Info och spelregler: 6-lag i varje pool. Innebär 5 matcher per
-                omgång. 2 lag går upp 2 lag åker ur och 2 stannar kvar.
-                Matcherna spelas i bäst av tre set. Vid 1-1 i set avgörs matchen
-                i super tiebreak, om man bedömer att man inte hinner spela ett
-                vanligt tredje set. Matchen får aldrig ta mer än 90 min. Pris:
-                Kostnaden för en omgång är 1 400kr/lag och man kan bara säga upp
-                sin plats i sista omgången innan sommaren och innan jul.
-                Vinnaren i varje serie vinner ett presentkort (kan hämtas ut
-                senast sex veckor efter avslutad omgång). Tävlingsregler: Besök
-                vår sida för tävlingsregler för aktuella regler. Aktuellt
-                spelscheman: Besök Helsingborg Padel League och Ladies Padel
-                League för aktuella spelscheman.
-              </p></b-col
-            >
+                COPY PASTE FRÅN PADELCREW.SE Info och spelregler: 6-lag i varje
+                pool. Innebär 5 matcher per omgång. 2 lag går upp 2 lag åker ur
+                och 2 stannar kvar. Matcherna spelas i bäst av tre set. Vid 1-1
+                i set avgörs matchen i super tiebreak, om man bedömer att man
+                inte hinner spela ett vanligt tredje set. Matchen får aldrig ta
+                mer än 90 min. Pris: Kostnaden för en omgång är 1 400kr/lag och
+                man kan bara säga upp sin plats i sista omgången innan sommaren
+                och innan jul. Vinnaren i varje serie vinner ett presentkort
+                (kan hämtas ut senast sex veckor efter avslutad omgång).
+                Tävlingsregler: Besök vår sida för tävlingsregler för aktuella
+                regler. Aktuellt spelscheman: Besök Helsingborg Padel League och
+                Ladies Padel League för aktuella spelscheman.
+              </p>
+              <hr
+            /></b-col>
           </b-row>
           <b-row class="mt-1 pt-1">
             <b-col sm="3" md="12">
@@ -56,11 +77,27 @@
                   </b-card>
                 </b-card-group>
               </div>
+              <hr />
+            </b-col>
+          </b-row>
+          <b-row class="mt-1 pt-1">
+            <b-col md="12" sm="12">
+              <div>
+                <b-embed
+                  type="iframe"
+                  allowfullscreen
+                  width="560"
+                  height="315"
+                  src="https://www.youtube.com/embed/zvIIVGV0Ci4"
+                  frameborder="0"
+                  allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                ></b-embed>
+              </div>
             </b-col>
           </b-row>
         </b-col>
 
-        <b-col md="4" sm="12">
+        <b-col class="mt-1" md="4" sm="12">
           <h1>Anmäl ditt lag!</h1>
           <b-form-group id="input-group-1" label="Lagnamn:">
             <b-form-input
@@ -161,7 +198,15 @@
             @click="onSubmit"
             >Skicka din anmälan!</b-button
           >
+
           <p hidden>{{ $v.form }}</p>
+
+          <hr />
+          <b-img
+            src="http://www.padelcrew.se/wp-content/uploads/2014/10/arena-landskrona-300x150.jpg"
+            fluid
+            alt="Sponsor image2"
+          ></b-img>
         </b-col>
       </b-row>
     </b-container>
@@ -171,11 +216,15 @@
 <script>
 import axios from "axios";
 import { required, alpha, minLength } from "vuelidate/lib/validators";
+import AppNewsfeed from "../components/Newsfeed";
 
 export default {
   created() {
     //OBS! FAKE DATAN I STOREN SKRivEr ÖVER EV. TEST-BOKNINGAR NÄR fetchUser körs.
     this.fetchVacancies();
+  },
+  components: {
+    AppNewsfeed
   },
   data() {
     return {

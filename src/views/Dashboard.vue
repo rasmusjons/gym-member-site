@@ -3,7 +3,7 @@
     <b-container fluid class="text-white mt-5 p-4 backgroundImage">
       <b-container>
         <b-row class="m-1 p-1">
-          <b-col cols="12">
+          <b-col cols="6">
             <b-avatar
               src="https://andaluciainformacion.es/media/776735/juan-lebron-ser-el-numero-uno-del-mundo-no-me-cambio-la-vida-.jpg"
               size="7rem"
@@ -20,8 +20,6 @@
               <b-icon-plus></b-icon-plus> Boka ny tid
             </b-button>
           </b-col>
-
-          <hr />
         </b-row>
       </b-container>
     </b-container>
@@ -29,7 +27,7 @@
     <b-container class="bg-light rounded-top" fluid>
       <b-container>
         <b-row class="m-1 p-1 pt-4">
-          <b-col cols="12">
+          <b-col sm="12" md="8">
             <b-tabs content-class="mt-4" pills>
               <b-tab active class="mt-1">
                 <template v-slot:title>
@@ -86,6 +84,12 @@
               </b-tab>
             </b-tabs>
           </b-col>
+          <b-col class="mt-4" sm="12" md="4">
+            <h5>Nyheter</h5>
+            <div class="mt-4">
+              <AppNewsfeed></AppNewsfeed>
+            </div>
+          </b-col>
         </b-row>
       </b-container>
     </b-container>
@@ -93,7 +97,11 @@
 </template>
 
 <script>
+import AppNewsfeed from "../components/Newsfeed";
 export default {
+  components: {
+    AppNewsfeed
+  },
   computed: {
     user() {
       //return this.$store.getters.user;

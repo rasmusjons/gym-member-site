@@ -1,6 +1,15 @@
 <template>
   <div>
     <b-container>
+      <b-row class="m-1 p-1">
+        <b-col cols="12">
+          <b-img
+            src="http://www.padelcrew.se/wp-content/uploads/2014/10/arenor-bg-1024x363.jpg"
+            fluid
+            alt="Responsive image"
+          ></b-img>
+        </b-col>
+      </b-row>
       <b-row class="m-1 p-1" v-if="!forgetPassword">
         <b-col cols="12">
           <h1>Logga in</h1>
