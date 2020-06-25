@@ -1,57 +1,275 @@
 <template>
-  <b-container>
-    <b-row class="m-1 p-1">
-      <b-col md="12" sm="6">
-        <b-card no-body>
-          <b-tabs card>
-            <b-tab title="Liga 1" active title-link-class="text-dark m-1">
-              <b-card-text
-                >Tab contents 1
-                <app-league :items="items"></app-league> </b-card-text
-            ></b-tab>
-            <b-tab title="Liga 2" title-link-class="text-dark m-1">
-              <b-card-text
-                >Tab contents 1
-                <app-league :items="items2"></app-league> </b-card-text
-            ></b-tab>
-            <b-tab title="Tävling A" title-link-class="text-dark m-1"
-              ><b-card-text>Tab contents 3</b-card-text></b-tab
+  <div>
+    <b-container>
+      <b-row class="m-1 p-1">
+        <b-col md="8">
+          <b-row class="mt-1 pt-1">
+            <b-col md="12" sm="12">
+              <div>
+                <b-embed
+                  type="iframe"
+                  allowfullscreen
+                  width="560"
+                  height="315"
+                  src="https://www.youtube.com/embed/zvIIVGV0Ci4"
+                  frameborder="0"
+                  allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                ></b-embed>
+              </div>
+            </b-col>
+          </b-row>
+          <b-row class="mt-1 pt-1">
+            <b-col md="12" sm="12">
+              <h1>Info och spelregler</h1>
+              <p>
+                Info och spelregler: 6-lag i varje pool. Innebär 5 matcher per
+                omgång. 2 lag går upp 2 lag åker ur och 2 stannar kvar.
+                Matcherna spelas i bäst av tre set. Vid 1-1 i set avgörs matchen
+                i super tiebreak, om man bedömer att man inte hinner spela ett
+                vanligt tredje set. Matchen får aldrig ta mer än 90 min. Pris:
+                Kostnaden för en omgång är 1 400kr/lag och man kan bara säga upp
+                sin plats i sista omgången innan sommaren och innan jul.
+                Vinnaren i varje serie vinner ett presentkort (kan hämtas ut
+                senast sex veckor efter avslutad omgång). Tävlingsregler: Besök
+                vår sida för tävlingsregler för aktuella regler. Aktuellt
+                spelscheman: Besök Helsingborg Padel League och Ladies Padel
+                League för aktuella spelscheman.
+              </p></b-col
             >
-            <b-tab title="Tävling B" title-link-class="text-dark m-1"
-              ><b-card-text>Tab contents 3</b-card-text></b-tab
-            >
-          </b-tabs>
-        </b-card>
-      </b-col>
-    </b-row>
-  </b-container>
+          </b-row>
+          <b-row class="mt-1 pt-1">
+            <b-col sm="3" md="12">
+              <h1>Lediga platser</h1>
+              <div>
+                <b-card-group deck>
+                  <b-card
+                    v-for="vacancy in vacancies"
+                    :key="vacancy.index"
+                    bg-variant="dark"
+                    text-variant="white"
+                    :header="vacancy.name"
+                    class="text-center"
+                  >
+                    <b-card-text class="d-inline-block">{{
+                      vacancy.vacancies
+                    }}</b-card-text>
+                  </b-card>
+                </b-card-group>
+              </div>
+            </b-col>
+          </b-row>
+        </b-col>
+
+        <b-col md="4" sm="12">
+          <h1>Anmäl ditt lag!</h1>
+          <b-form-group id="input-group-1" label="Lagnamn:">
+            <b-form-input
+              autofocus
+              class="rounded shadow-sm mb-1 border border-warning"
+              v-model="form.teamName"
+              placeholder="Lagnamn"
+              @input="$v.form.teamName.$touch"
+              :state="$v.form.teamName.$dirty ? !$v.form.teamName.$error : null"
+            ></b-form-input>
+          </b-form-group>
+
+          <b-form-group
+            id="input-group-2"
+            label="Liga:"
+            description="Välj den liga somn passar dig"
+          >
+            <b-form-radio
+              v-for="(league, index) in leagues"
+              :key="league.index"
+              variant="primary"
+              :value="league"
+              v-model="form.league"
+              name="radio1"
+              @blur="$v.league.$each[index].value.$touch()"
+              :state="$v.form.league.required ? true : null"
+              >{{ league }}
+            </b-form-radio>
+          </b-form-group>
+
+          <b-form-group
+            id="input-group-3"
+            label="Medspelares förnamn och efternamn:"
+          >
+            <b-form-input
+              autofocus
+              class="rounded shadow-sm mb-1 border border-warning"
+              v-model="form.teamMemberFirstName"
+              placeholder="Förnamn"
+              @input="$v.form.teamMemberFirstName.$touch"
+              :state="
+                $v.form.teamMemberFirstName.$dirty
+                  ? !$v.form.teamMemberFirstName.$error
+                  : null
+              "
+            ></b-form-input>
+            <b-form-input
+              autofocus
+              class="rounded shadow-sm mb-1 border border-warning"
+              v-model="form.teamMemberLastName"
+              placeholder="Eftenamn"
+              @input="$v.form.teamMemberLastName.$touch"
+              :state="
+                $v.form.teamMemberLastName.$dirty
+                  ? !$v.form.teamMemberLastName.$error
+                  : null
+              "
+            ></b-form-input>
+          </b-form-group>
+
+          <b-form-group
+            id="input-group-4"
+            label="Reservspelares förnamn och efternamn:"
+            description="Anmälan av reserv är frivilligt."
+          >
+            <b-form-input
+              autofocus
+              class="rounded shadow-sm mb-1 border border-warning"
+              v-model="form.teamReserveFirstName"
+              placeholder="Förnamn"
+            ></b-form-input>
+            <b-form-input
+              autofocus
+              class="rounded shadow-sm mb-1 border border-warning"
+              v-model="form.teamReserveLastName"
+              placeholder="Efternam"
+            ></b-form-input>
+          </b-form-group>
+
+          <b-form-group id="input-group-5" label="Lagets klass:">
+            <b-form-radio
+              v-for="(teamClass, index) in teamClasses"
+              :key="teamClass.index"
+              variant="primary"
+              :value="teamClass"
+              v-model="form.teamClass"
+              name="radio2"
+              @blur="$v.teamClass.$each[index].value.$touch()"
+              :state="$v.form.teamClass.required ? true : null"
+              >{{ teamClass }}
+            </b-form-radio>
+          </b-form-group>
+          <b-button
+            class="mb-1"
+            variant="primary"
+            type="submit"
+            :disabled="$v.$invalid"
+            @click="onSubmit"
+            >Skicka din anmälan!</b-button
+          >
+          <p hidden>{{ $v.form }}</p>
+        </b-col>
+      </b-row>
+    </b-container>
+  </div>
 </template>
 
 <script>
-import AppLeague from "../components/League";
+import axios from "axios";
+import { required, alpha, minLength } from "vuelidate/lib/validators";
+
 export default {
+  created() {
+    //OBS! FAKE DATAN I STOREN SKRivEr ÖVER EV. TEST-BOKNINGAR NÄR fetchUser körs.
+    this.fetchVacancies();
+  },
   data() {
     return {
-      items: [
-        { Rank: 40, first_name: "Dickerson", last_name: "Macdonald" },
-        { Rank: 21, first_name: "Larsen", last_name: "Shaw" },
-        { Rank: 89, first_name: "Geneva", last_name: "Wilson" },
-        { Rank: 38, first_name: "Jami", last_name: "Carney" }
+      vacancies: null,
+      leagues: [
+        "Helsingborg Padel League",
+        "Ladies Padel League",
+        "Mixed Padel League",
+        "Sommare - HPL"
       ],
-      items2: [
-        { Rank: 1, first_name: "Dickerson", last_name: "Macdonald" },
-        { Rank: 2, first_name: "Larsen", last_name: "Shaw" },
-        { Rank: 3, first_name: "Geneva", last_name: "Wilson" },
-        { Rank: 4, first_name: "Jami", last_name: "Carney" }
-      ]
+      teamClasses: [
+        "A - elit",
+        "B - tävling",
+        "C - glad amatör",
+        "D - nybörjare"
+      ],
+      form: {
+        teamName: null,
+        league: [],
+        teamMemberFirstName: null,
+        teamMemberLastName: null,
+        teamReserveFirstName: null,
+        teamReserveLastName: null,
+        teamClass: []
+      }
     };
   },
-  components: {
-    AppLeague
+
+  methods: {
+    onSubmit() {
+      console.log("submit");
+    },
+    fetchVacancies() {
+      console.log("fetchVacancies -> fetchVacancies", this.fetchVacancies);
+
+      axios
+        .post("http://localhost:3002/users")
+        .then(response => {
+          console.log(response);
+          this.vacancies = [
+            {
+              name: "Helsingborg Padel League",
+              vacancies: "2"
+            },
+            {
+              name: "Ladies Padel League",
+              vacancies: "1"
+            },
+            {
+              name: "Mixed Padel League",
+              vacancies: "2"
+            },
+            {
+              name: "Sommare - HPL",
+              vacancies: "1"
+            }
+          ];
+          console.log(this.vacancies);
+        })
+        .catch(error => {
+          console.log(error);
+        });
+    }
+  },
+  validations: {
+    form: {
+      teamName: {
+        required
+      },
+      league: {
+        required
+      },
+      teamMemberFirstName: {
+        required,
+        alpha,
+        minLength: minLength(2)
+      },
+      teamMemberLastName: {
+        required,
+        alpha,
+        minLength: minLength(2)
+      },
+      teamReserveFirstName: {
+        alpha,
+        minLength: minLength(2)
+      },
+      teamReserveLasstName: {
+        alpha,
+        minLength: minLength(2)
+      },
+      teamClass: {
+        required
+      }
+    }
   }
 };
 </script>
-
-<style lang="scss" scoped>
-@import "../styles/variables.scss";
-</style>

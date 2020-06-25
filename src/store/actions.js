@@ -38,29 +38,6 @@ export const cancelClass = ({ commit }, bookingId) => {
     });
 };
 
-export const signup = ({ commit }, authData) => {
-  console.log(commit);
-  const url = "http://localhost:3002/users";
-
-  const token = 43211;
-  const userId = "User id";
-
-  axios
-    .post(url, authData)
-    .then(response => {
-      console.log(response);
-      commit("authUser", {
-        token,
-        userId
-      });
-      localStorage.setItem("token", token);
-      router.replace("/dashboard").catch(error => console.log(error));
-    })
-    .catch(error => {
-      console.log(error);
-    });
-};
-
 export const login = ({ commit }, authData) => {
   console.log(commit);
   const url = "http://localhost:3002/users";
@@ -112,4 +89,27 @@ export const fetchUser = ({ commit }) => {
       commit("storeUser", responseUser);
     })
     .catch(error => console.log(error));
+};
+
+export const signup = ({ commit }, authData) => {
+  console.log(commit);
+  const url = "http://localhost:3002/users";
+
+  const token = 43211;
+  const userId = "User id";
+
+  axios
+    .post(url, authData)
+    .then(response => {
+      console.log(response);
+      commit("authUser", {
+        token,
+        userId
+      });
+      localStorage.setItem("token", token);
+      router.replace("/dashboard").catch(error => console.log(error));
+    })
+    .catch(error => {
+      console.log(error);
+    });
 };

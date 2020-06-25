@@ -1,9 +1,15 @@
 <template>
   <b-container class="container">
+    <b-row v-if="showBooking" class="m-1 p-1">
+      <b-col cols="12">
+        <h5>Mina bokningar:</h5>
+        <p>{{ "computed classes" }}</p>
+      </b-col>
+    </b-row>
+
     <b-row class="m-1 p-1">
       <b-col cols="12">
         <div>
-          <button @click="getClasses">getclasses</button>
           <label for="example-datepicker">Filtrera på datum</label>
 
           <b-form-datepicker
@@ -23,33 +29,117 @@
         </div>
       </b-col>
     </b-row>
-    <b-row v-if="date" class="m-1 p-1">
-      <b-col cols="12">
-        <h5>
-          Lediga tider.
-          <span v-if="!isAuthenticated">Logga in för att boka!</span>
-        </h5>
-        <b-col cols="12" v-for="time in times" :key="time.index">
-          <b-button
-            variant="primary"
-            class="m-2"
-            :disabled="isAuthenticated"
-            @click="onPickTime(time)"
-            >Time: {{ time }}
-          </b-button>
-        </b-col>
+
+    <!-- tider en dag -->
+    <b-row v-if="date && !addThreeDays" class="m-1 p-1">
+      <b-col sm="12" md="6">
+        <div class="bg-light rounded p-3 mt-1">
+          <h5>
+            Lediga tider.
+            <span v-if="isAuthenticated">Logga in för att boka!</span>
+          </h5>
+          <b-col cols="12" v-for="time in times" :key="time.index">
+            <b-button
+              variant="primary"
+              class="mt-2"
+              :disabled="isAuthenticated"
+              @click="onPickTime(addDaysToDate(0), time)"
+              >Time: {{ time }}
+            </b-button>
+          </b-col>
+        </div>
       </b-col>
     </b-row>
-    <b-row v-if="showBooking" class="m-1 p-1">
-      <b-col cols="12">
-        <h5>Mina bokningar:</h5>
-        <p>{{ classes }}</p>
+
+    <!-- tider för +tredagar -->
+    <b-row v-if="date && addThreeDays" class="m-1 p-1">
+      <b-col md="3">
+        <div class="bg-light rounded p-3 mt-1">
+          <p>{{ addDaysToDate(0) }}</p>
+          <div v-for="time in times" :key="time.index">
+            <b-button
+              block
+              variant="primary"
+              class="mt-2"
+              :disabled="isAuthenticated"
+              @click="onPickTime(addDaysToDate(0), time)"
+              >{{ time }}: Bana A.
+            </b-button>
+          </div>
+        </div>
+      </b-col>
+      <b-col md="3">
+        <div class="bg-light rounded p-3 mt-1 ">
+          <p>{{ addDaysToDate(1) }}</p>
+          <div v-for="time in times" :key="time.index">
+            <b-button
+              block
+              variant="primary"
+              class="mt-2"
+              :disabled="isAuthenticated"
+              @click="onPickTime(addDaysToDate(1), time)"
+              >{{ time }}: Bana A.
+            </b-button>
+          </div>
+        </div>
+      </b-col>
+      <b-col md="3">
+        <div class="bg-light rounded p-3 mt-1">
+          <p>{{ addDaysToDate(2) }}</p>
+          <div v-for="time in times" :key="time.index">
+            <b-button
+              block
+              variant="primary"
+              class="mt-2"
+              :disabled="isAuthenticated"
+              @click="onPickTime(addDaysToDate(2), time)"
+              >{{ time }}: Bana A.
+            </b-button>
+          </div>
+        </div>
+      </b-col>
+      <b-col md="3">
+        <div class="bg-light rounded p-3 mt-1">
+          <p>{{ addDaysToDate(3) }}</p>
+          <div v-for="time in times" :key="time.index">
+            <b-button
+              block
+              variant="primary"
+              class="mt-2"
+              :disabled="isAuthenticated"
+              @click="onPickTime(addDaysToDate(3), time)"
+            >
+              {{ time }}: Bana A.
+            </b-button>
+          </div>
+        </div>
       </b-col>
     </b-row>
   </b-container>
 </template>
 
 <script>
+import moment from "moment";
+
+moment.locale("sv");
+
+moment.updateLocale("sv", {
+  relativeTime: {
+    future: "om %s",
+    past: "%s",
+    ss: "%d sek",
+    m: "1 minut",
+    mm: "%d min",
+    h: "en timme",
+    hh: "%d timmar",
+    d: "en dag",
+    dd: "%d dagar",
+    M: "en månad",
+    MM: "%d mån",
+    y: "ett år",
+    yy: "%d år"
+  }
+});
 export default {
   data() {
     return {
@@ -57,7 +147,17 @@ export default {
       times: ["10:00-11:00", "11:00-12:00", "12:00-13:00"],
       time: "",
       showBooking: false,
-      addThreeDays: false
+      addThreeDays: false,
+      showBookingSuccess: false,
+      showBookingError: false
+    };
+  },
+  created() {
+    //lägger till en function på Date-protoypen för datum X-dagar från ett annat datum.
+    Date.prototype.addDays = function(days) {
+      const date = new Date(this.valueOf());
+      date.setDate(date.getDate() + days);
+      return date.toJSON();
     };
   },
   computed: {
@@ -69,6 +169,12 @@ export default {
     }
   },
   methods: {
+    addDaysToDate(days) {
+      const dateTemp = new Date(this.date);
+      const date = dateTemp.addDays(days);
+      console.log(date);
+      return moment(date).format("YYYY-MM-DD");
+    },
     getClasses() {
       //hämtar datum för valt datum samt plus tre dagar.
       this.addThreeDays = true;
@@ -76,14 +182,7 @@ export default {
         const threeDays = 3;
         const dates = [];
 
-        //lägger till en functino på Date-protoypen för datum X-dagar från ett annat datum.
-        Date.prototype.addDays = function(days) {
-          var date = new Date(this.valueOf());
-          date.setDate(date.getDate() + days);
-          return date.toJSON();
-        };
-
-        var date = new Date(this.date);
+        const date = new Date(this.date);
 
         //bygger ihop en datum lista med fyra datum.
         for (let index = 0; index <= threeDays; index++) {
@@ -104,7 +203,7 @@ export default {
       } else {
         //hämtar data för valt datum
         this.axios
-          .post("http://localhost:3002/users", date)
+          .post("http://localhost:3002/users")
           .then(response => {
             console.log(response);
           })
@@ -113,9 +212,9 @@ export default {
           });
       }
     },
-    onPickTime(time) {
+    onPickTime(date, time) {
       this.$bvModal
-        .msgBoxConfirm(`Du vill boka: ${this.date} klockan ${time}`, {
+        .msgBoxConfirm(`Du vill boka: ${date} klockan ${time}`, {
           title: "Boka tid",
           size: "s",
           buttonSize: "md",
@@ -128,13 +227,30 @@ export default {
           centered: true
         })
         .then(() => {
-          const bookingData = {
-            date: this.date,
-            time
-          };
-          this.$store.dispatch("bookClass", bookingData);
+          // const bookingData = {
+          //   date: this.date,
+          //   time
+          // };
+          // this.$store.dispatch("bookClass", bookingData);
+          this.showBookingSuccess = true;
           this.showBooking = true;
+          this.makeToast("success");
+        })
+        .catch(() => {
+          this.makeToast("danger");
         });
+    },
+    makeToast(variant = null) {
+      this.$bvToast.toast(
+        variant === "success"
+          ? "Din bokning är bekräftad"
+          : "Hoppsan! Något gick fel, försök igen.",
+        {
+          title: variant === "success" ? "Bokat!" : "Fel",
+          variant: variant,
+          solid: true
+        }
+      );
     }
   }
 };

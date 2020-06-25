@@ -98,7 +98,7 @@
               "
             ></b-form-input>
           </b-form-group>
-
+          <h1>Lägga till adress? de har det vid tävling...</h1>
           <b-form-file
             variant="primary"
             accept=".jpg, .png"
@@ -192,18 +192,4 @@ export default {
 };
 </script>
 
-<style scoped>
-.dropZone {
-  color: #034a4a;
-  min-height: 200px;
-  width: 70%;
-  margin: auto;
-  background: #bedce0;
-  border-radius: 4px;
-  padding: 20px;
-  transition: all 0.2s;
-  outline: 2px dashed #034a4a9c;
-  outline-offset: -5px;
-  text-align: center;
-}
-</style>
+<style scoped></style>
