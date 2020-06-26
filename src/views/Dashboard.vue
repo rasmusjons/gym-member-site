@@ -1,10 +1,11 @@
 <template>
-  <div class="bg-dark rounded-top ">
+  <div class="radient rounded-top ">
     <b-container fluid class="text-white mt-5 p-4 backgroundImage">
       <b-container>
         <b-row class="m-1 p-1">
-          <b-col cols="6">
+          <b-col sm="12" md="6" class="mt-4">
             <b-avatar
+              class="mt-4 mb-4 TEMPGREYIMAGE"
               src="https://andaluciainformacion.es/media/776735/juan-lebron-ser-el-numero-uno-del-mundo-no-me-cambio-la-vida-.jpg"
               size="7rem"
             ></b-avatar>
@@ -19,6 +20,11 @@
             <b-button variant="primary" @click="$router.push('/boka')">
               <b-icon-plus></b-icon-plus> Boka ny tid
             </b-button>
+          </b-col>
+          <b-col sm="12" md="6" class="mt-4">
+            <div class="chartContainer">
+              <ChartContainer></ChartContainer>
+            </div>
           </b-col>
         </b-row>
       </b-container>
@@ -98,9 +104,12 @@
 
 <script>
 import AppNewsfeed from "../components/Newsfeed";
+import ChartContainer from "../components/ChartContainer.vue";
+
 export default {
   components: {
-    AppNewsfeed
+    AppNewsfeed,
+    ChartContainer
   },
   computed: {
     user() {
@@ -160,7 +169,7 @@ export default {
   },
   created() {
     //OBS! FAKE DATAN I STOREN SKRivEr ÖVER EV. TEST-BOKNINGAR NÄR fetchUser körs.
-    this.$store.dispatch("fetchUser");
+    // this.$store.dispatch("fetchUser");
   },
   methods: {
     onCancel(club, date, time, id) {
@@ -189,5 +198,22 @@ export default {
 <style scoped>
 .bg-dark {
   background-color: black !important;
+}
+.radient {
+  background: radial-gradient(
+    ellipse at center,
+    rgba(41, 41, 41, 1) 0%,
+    rgba(38, 38, 38, 1) 20%,
+    rgba(20, 20, 20, 1) 51%,
+    rgba(0, 0, 0, 1) 100%
+  );
+}
+
+.chartContainer {
+  max-width: 350px;
+}
+
+.TEMPGREYIMAGE {
+  filter: grayscale(100%);
 }
 </style>

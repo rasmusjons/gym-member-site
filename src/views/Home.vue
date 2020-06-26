@@ -79,56 +79,12 @@ export default {
   }
 }
 .jumbo {
-  background: -moz-radial-gradient(
-    center,
-    ellipse cover,
-    rgba(41, 41, 41, 1) 0%,
-    rgba(38, 38, 38, 1) 7%,
-    rgba(20, 20, 20, 1) 51%,
-    rgba(0, 0, 0, 1) 100%
-  ); /* ff3.6+ */
-  background: -webkit-gradient(
-    radial,
-    center center,
-    0px,
-    center center,
-    100%,
-    color-stop(0%, rgba(41, 41, 41, 1)),
-    color-stop(7%, rgba(38, 38, 38, 1)),
-    color-stop(51%, rgba(20, 20, 20, 1)),
-    color-stop(100%, rgba(0, 0, 0, 1))
-  ); /* safari4+,chrome */
-  background: -webkit-radial-gradient(
-    center,
-    ellipse cover,
-    rgba(41, 41, 41, 1) 0%,
-    rgba(38, 38, 38, 1) 7%,
-    rgba(20, 20, 20, 1) 51%,
-    rgba(0, 0, 0, 1) 100%
-  ); /* safari5.1+,chrome10+ */
-  background: -o-radial-gradient(
-    center,
-    ellipse cover,
-    rgba(41, 41, 41, 1) 0%,
-    rgba(38, 38, 38, 1) 7%,
-    rgba(20, 20, 20, 1) 51%,
-    rgba(0, 0, 0, 1) 100%
-  ); /* opera 11.10+ */
-  background: -ms-radial-gradient(
-    center,
-    ellipse cover,
-    rgba(41, 41, 41, 1) 0%,
-    rgba(38, 38, 38, 1) 7%,
-    rgba(20, 20, 20, 1) 51%,
-    rgba(0, 0, 0, 1) 100%
-  ); /* ie10+ */
   background: radial-gradient(
     ellipse at center,
     rgba(41, 41, 41, 1) 0%,
     rgba(38, 38, 38, 1) 7%,
     rgba(20, 20, 20, 1) 51%,
     rgba(0, 0, 0, 1) 100%
-  ); /* w3c */
-  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#292929', endColorstr='#000000',GradientType=0 ); /* ie6-9 */
+  );
 }
 </style>
