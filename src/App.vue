@@ -25,23 +25,7 @@ export default {
 @import "/styles/variables.scss";
 @import url("https://fonts.googleapis.com/css2?family=Architects+Daughter&family=Oswald&display=swap");
 
-//ROUTER TRANSITION
-.fade-enter {
-  opacity: 0;
-}
-
-.fade-enter-active {
-  transition: opacity 0.2s;
-}
-.fade-leave-to {
-  opacity: 0;
-}
-
-.fade-leave-active {
-  transition: opacity 0.2s;
-}
-//ROUTER TRANSITION - SLUT
-
+//DENNA COMPONENT
 #app {
   padding-left: 0 !important;
   padding-right: 0 !important;
@@ -71,32 +55,22 @@ export default {
     border-bottom: rgba(255, 255, 255, 1) 2px solid;
   }
 }
+//DENNA COMPONENT SLUT ------->
 
-/*GLOBALS */
-
-.btn-primary {
-  background-color: $padelorange !important;
-  border-color: $padelorange !important;
-  transition: all 0.2s ease-in-out;
+//ROUTER TRANSITION
+.fade-enter {
+  opacity: 0;
 }
 
-.btn-primary:hover {
-  opacity: 0.9 !important;
+.fade-enter-active {
+  transition: opacity 0.2s;
+}
+.fade-leave-to {
+  opacity: 0;
 }
 
-.link {
-  font-weight: 700;
-  color: $padelorange !important;
-  cursor: pointer;
-  transition: all 0.2s ease-in-out;
+.fade-leave-active {
+  transition: opacity 0.2s;
 }
-
-.link:hover {
-  opacity: 0.9;
-}
-
-.nav-pills .nav-link.active,
-.nav-pills .show > .nav-link {
-  background-color: $padelorange !important;
-}
+//ROUTER TRANSITION - SLUT
 </style>

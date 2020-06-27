@@ -4,7 +4,7 @@
       <div class="background">
         <b-row class="m-1 p-1">
           <b-col md="6" sm="12">
-            <h1>Juicy headline!</h1>
+            <h2>Juicy headline!</h2>
             <p>
               Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ipsam et
               aperiam autem minima. Voluptate voluptatum enim velit, itaque
@@ -18,7 +18,7 @@
           </b-col>
 
           <b-col md="6" sm="12">
-            <h1 class="invisible">BLANK</h1>
+            <h2 class="invisible">BLANK</h2>
             <app-carousel></app-carousel>
 
             <p>

@@ -1,125 +1,133 @@
 <template>
-  <b-container class="container">
-    <b-row v-if="showBooking" class="m-1 p-1">
-      <b-col cols="12">
-        <h5>Mina bokningar:</h5>
-        <p>{{ "computed classes" }}</p>
-      </b-col>
-    </b-row>
+  <div>
+    <app-jumbo :headline="headlineJumbo"></app-jumbo>
 
-    <b-row class="m-1 p-1">
-      <b-col cols="12">
-        <div>
-          <label for="example-datepicker">Filtrera på datum</label>
-
-          <b-form-datepicker
-            id="example-datepicker"
-            v-model="date"
-            class="mb-2"
-          ></b-form-datepicker>
-          <b-form-checkbox
-            id="checkbox-1"
-            v-model="addThreeDays"
-            name="checkbox-1"
-            value="true"
-            unchecked-value="false"
-          >
-            Sök flexibelt, 3 dagar efter.
-          </b-form-checkbox>
-        </div>
-      </b-col>
-    </b-row>
-
-    <!-- tider en dag -->
-    <b-row v-if="date && !addThreeDays" class="m-1 p-1">
-      <b-col sm="12" md="6">
-        <div class="bg-light rounded p-3 mt-1">
-          <h5>
-            Lediga tider.
-            <span v-if="isAuthenticated">Logga in för att boka!</span>
-          </h5>
-          <b-col cols="12" v-for="time in times" :key="time.index">
-            <b-button
-              variant="primary"
-              class="mt-2"
-              :disabled="isAuthenticated"
-              @click="onPickTime(addDaysToDate(0), time)"
-              >Time: {{ time }}
-            </b-button>
+    <b-container class="container">
+      <div class="background">
+        <b-row v-if="showBooking" class="m-1 p-1">
+          <b-col cols="12">
+            <h5>Mina bokningar:</h5>
+            <p>{{ "computed classes" }}</p>
           </b-col>
-        </div>
-      </b-col>
-    </b-row>
+        </b-row>
 
-    <!-- tider för +tredagar -->
-    <b-row v-if="date && addThreeDays" class="m-1 p-1">
-      <b-col md="3">
-        <div class="bg-light rounded p-3 mt-1">
-          <p>{{ addDaysToDate(0) }}</p>
-          <div v-for="time in times" :key="time.index">
-            <b-button
-              block
-              variant="primary"
-              class="mt-2"
-              :disabled="isAuthenticated"
-              @click="onPickTime(addDaysToDate(0), time)"
-              >{{ time }}: Bana A.
-            </b-button>
-          </div>
-        </div>
-      </b-col>
-      <b-col md="3">
-        <div class="bg-light rounded p-3 mt-1 ">
-          <p>{{ addDaysToDate(1) }}</p>
-          <div v-for="time in times" :key="time.index">
-            <b-button
-              block
-              variant="primary"
-              class="mt-2"
-              :disabled="isAuthenticated"
-              @click="onPickTime(addDaysToDate(1), time)"
-              >{{ time }}: Bana A.
-            </b-button>
-          </div>
-        </div>
-      </b-col>
-      <b-col md="3">
-        <div class="bg-light rounded p-3 mt-1">
-          <p>{{ addDaysToDate(2) }}</p>
-          <div v-for="time in times" :key="time.index">
-            <b-button
-              block
-              variant="primary"
-              class="mt-2"
-              :disabled="isAuthenticated"
-              @click="onPickTime(addDaysToDate(2), time)"
-              >{{ time }}: Bana A.
-            </b-button>
-          </div>
-        </div>
-      </b-col>
-      <b-col md="3">
-        <div class="bg-light rounded p-3 mt-1">
-          <p>{{ addDaysToDate(3) }}</p>
-          <div v-for="time in times" :key="time.index">
-            <b-button
-              block
-              variant="primary"
-              class="mt-2"
-              :disabled="isAuthenticated"
-              @click="onPickTime(addDaysToDate(3), time)"
-            >
-              {{ time }}: Bana A.
-            </b-button>
-          </div>
-        </div>
-      </b-col>
-    </b-row>
-  </b-container>
+        <b-row class="m-1 p-1">
+          <b-col cols="12">
+            <h2>Boka!</h2>
+            <div>
+              <label for="example-datepicker">Filtrera på datum</label>
+
+              <b-form-datepicker
+                id="example-datepicker"
+                v-model="date"
+                class="mb-2"
+              ></b-form-datepicker>
+              <b-form-checkbox
+                id="checkbox-1"
+                v-model="addThreeDays"
+                name="checkbox-1"
+                value="true"
+                unchecked-value="false"
+              >
+                Sök flexibelt, 3 dagar efter.
+              </b-form-checkbox>
+            </div>
+          </b-col>
+        </b-row>
+
+        <!-- tider en dag -->
+        <b-row v-if="date && !addThreeDays" class="m-1 p-1">
+          <b-col sm="12" md="6">
+            <div class="bg-light rounded p-3 mt-1">
+              <h5>
+                Lediga tider.
+                <span v-if="isAuthenticated">Logga in för att boka!</span>
+              </h5>
+              <b-col cols="12" v-for="time in times" :key="time.index">
+                <b-button
+                  variant="primary"
+                  class="mt-2"
+                  :disabled="isAuthenticated"
+                  @click="onPickTime(addDaysToDate(0), time)"
+                  >Time: {{ time }}
+                </b-button>
+              </b-col>
+            </div>
+          </b-col>
+        </b-row>
+
+        <!-- tider för +tredagar -->
+        <b-row v-if="date && addThreeDays" class="m-1 p-1">
+          <b-col md="3">
+            <div class="bg-light rounded p-3 mt-1">
+              <p>{{ addDaysToDate(0) }}</p>
+              <div v-for="time in times" :key="time.index">
+                <b-button
+                  block
+                  variant="primary"
+                  class="mt-2"
+                  :disabled="isAuthenticated"
+                  @click="onPickTime(addDaysToDate(0), time)"
+                  >{{ time }}: Bana A.
+                </b-button>
+              </div>
+            </div>
+          </b-col>
+          <b-col md="3">
+            <div class="bg-light rounded p-3 mt-1 ">
+              <p>{{ addDaysToDate(1) }}</p>
+              <div v-for="time in times" :key="time.index">
+                <b-button
+                  block
+                  variant="primary"
+                  class="mt-2"
+                  :disabled="isAuthenticated"
+                  @click="onPickTime(addDaysToDate(1), time)"
+                  >{{ time }}: Bana A.
+                </b-button>
+              </div>
+            </div>
+          </b-col>
+          <b-col md="3">
+            <div class="bg-light rounded p-3 mt-1">
+              <p>{{ addDaysToDate(2) }}</p>
+              <div v-for="time in times" :key="time.index">
+                <b-button
+                  block
+                  variant="primary"
+                  class="mt-2"
+                  :disabled="isAuthenticated"
+                  @click="onPickTime(addDaysToDate(2), time)"
+                  >{{ time }}: Bana A.
+                </b-button>
+              </div>
+            </div>
+          </b-col>
+          <b-col md="3">
+            <div class="bg-light rounded p-3 mt-1">
+              <p>{{ addDaysToDate(3) }}</p>
+              <div v-for="time in times" :key="time.index">
+                <b-button
+                  block
+                  variant="primary"
+                  class="mt-2"
+                  :disabled="isAuthenticated"
+                  @click="onPickTime(addDaysToDate(3), time)"
+                >
+                  {{ time }}: Bana A.
+                </b-button>
+              </div>
+            </div>
+          </b-col>
+        </b-row>
+      </div>
+    </b-container>
+  </div>
 </template>
 
 <script>
 import moment from "moment";
+import AppJumbo from "../components/Jumbo";
 
 moment.locale("sv");
 
@@ -141,8 +149,12 @@ moment.updateLocale("sv", {
   }
 });
 export default {
+  components: {
+    AppJumbo
+  },
   data() {
     return {
+      headlineJumbo: "Boka!",
       date: "",
       times: ["10:00-11:00", "11:00-12:00", "12:00-13:00"],
       time: "",
@@ -162,6 +174,7 @@ export default {
   },
   computed: {
     isAuthenticated() {
+      //om personen är inloggad
       return this.$store.getters.isAuthenticated;
     },
     classes() {
@@ -256,7 +269,9 @@ export default {
 };
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
+@import "../styles/variables.scss";
+@import "../styles/globalclasses.css";
 .container {
   min-height: 400px;
 }

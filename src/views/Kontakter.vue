@@ -12,7 +12,7 @@
               bg-variant="dark"
               text-variant="white"
             >
-              <app-pris :prices="prices"></app-pris> </b-card
+              <app-kontakt :contactInfo="contactInfo"></app-kontakt> </b-card
           ></b-col>
           <b-col sm="12" md="6">
             <b-card
@@ -21,7 +21,7 @@
               bg-variant="dark"
               text-variant="white"
             >
-              <app-pris :prices="prices"></app-pris> </b-card
+              <app-kontakt :contactInfo="contactInfo"></app-kontakt> </b-card
           ></b-col>
         </b-row>
         <b-row class="m-1 p-1">
@@ -32,7 +32,7 @@
               bg-variant="dark"
               text-variant="white"
             >
-              <app-pris :prices="prices"></app-pris> </b-card
+              <app-kontakt :contactInfo="contactInfo"></app-kontakt> </b-card
           ></b-col>
           <b-col sm="12" md="6">
             <b-card
@@ -41,7 +41,7 @@
               bg-variant="dark"
               text-variant="white"
             >
-              <app-pris :prices="prices"></app-pris> </b-card
+              <app-kontakt :contactInfo="contactInfo"></app-kontakt> </b-card
           ></b-col>
         </b-row>
       </div>
@@ -50,24 +50,26 @@
 </template>
 
 <script>
-import AppPris from "../components/Pris";
+import AppKontakt from "../components/Kontakt";
 import AppJumbo from "../components/Jumbo";
 
 export default {
   data() {
     return {
-      prices: [
-        "MÅNDAG – TORSDAG 06.00 – 16.00 = 220 KR/TIM",
-        "MÅNDAG – TORSDAG 06.00 – 16.00 = 220 KR/TIM",
-        "MÅNDAG – TORSDAG 06.00 – 16.00 = 220 KR/TIM",
-        "MÅNDAG – TORSDAG 06.00 – 16.00 = 220 KR/TIM",
-        "MÅNDAG – TORSDAG 06.00 – 16.00 = 220 KR/TIM"
-      ],
-      headlineJumbo: "Priser"
+      headlineJumbo: "Kontakta oss",
+      contactInfo: {
+        title: "PADEL CREW AB",
+        name: "PADEL CREW AB",
+        adress: "Rännarbanan 32",
+        postcode: "252 32",
+        postaladress: "Helsingborg",
+        phonenumber: "042-442 26 50",
+        mail: "info@padelcrew.se"
+      }
     };
   },
   components: {
-    AppPris,
+    AppKontakt,
     AppJumbo
   }
 };

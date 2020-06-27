@@ -10,7 +10,9 @@
 export default {};
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
+@import "../styles/variables.scss";
+@import "../styles/globalclasses.css";
 .fade-enter {
   opacity: 0;
 }

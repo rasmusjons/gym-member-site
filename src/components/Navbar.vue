@@ -30,12 +30,24 @@
                   @click="$router.push('/facebook')"
                   >Facebook</b-nav-item
                 >
-                <b-nav-item class="m-1" href="#">Regler</b-nav-item>
-                <b-nav-item class="m-1" href="#">Padel i skolan</b-nav-item>
+                <b-nav-item
+                  class="m-1"
+                  href="#"
+                  @click="$router.push('/regler')"
+                  >Regler</b-nav-item
+                >
+                <b-nav-item class="m-1" href="#" @click="$router.push('/skola')"
+                  >Padel i skolan</b-nav-item
+                >
                 <b-nav-item class="m-1" href="#"
                   >Padel Crew Padelklubb</b-nav-item
                 >
-                <b-nav-item class="m-1" href="#">Kontakta oss</b-nav-item>
+                <b-nav-item
+                  class="m-1"
+                  href="#"
+                  @click="$router.push('/kontakter')"
+                  >Kontakta oss</b-nav-item
+                >
               </b-navbar-nav>
               <b-navbar-nav v-if="isAuthenticated">
                 <b-nav-item class="m-1">

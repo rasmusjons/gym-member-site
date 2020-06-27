@@ -1,0 +1,67 @@
+
+/* TEXT */
+h1,
+h2 {
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+}
+
+
+/* BUTTONS */
+.btn-primary {
+  background-color: rgb(247, 149, 0) !important;
+  border-color: rgb(247, 149, 0) !important;
+  transition: all 0.2s ease-in-out;
+  text-transform: uppercase !important;
+  letter-spacing: 1.5px !important;
+}
+.btn {
+  transition: all 0.2s ease-in-out;
+  text-transform: uppercase !important;
+  letter-spacing: 1.5px !important;
+}
+.btn-primary:hover {
+  opacity: 0.9 !important;
+}
+
+
+/* CARDS */
+.card-header,
+.card-title {
+  text-transform: uppercase !important;
+  letter-spacing: 1px !important;
+}
+
+/* LINKS */
+.link {
+  font-weight: 700;
+  color: rgb(247, 149, 0) !important;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+
+.link:hover {
+  opacity: 0.9;
+}
+.nav-pills .nav-link.active,
+.nav-pills .show > .nav-link {
+  background-color: rgb(247, 149, 0) !important;
+}
+
+
+
+
+/* LISTS */
+.listA {
+  list-style-type: square;
+}
+.listB {
+  list-style-type: circle;
+}
+
+
+.background {
+  background-color: #eeeeee7a;
+  padding: 10px
+}

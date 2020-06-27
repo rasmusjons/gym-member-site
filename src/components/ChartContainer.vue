@@ -18,11 +18,13 @@ export default {
   },
   data() {
     return {
+      //data för line-chart. Uppdaters med fillData()
       datacollection: null,
       gradient: null,
       label: [0, 5, 10, 15, 20, 25, 30],
       dataLabel: "Spelade matcher senaste månaden",
       data: null,
+      //options för line-chart
       options: {
         responsive: true,
         maintainAspectRatio: true,
@@ -36,10 +38,10 @@ export default {
     };
   },
   mounted() {
+    //Hämtar en referens till vancas och använder den för att skapa gradient förger.
     this.gradient = this.$children[0].$refs.canvas
       .getContext("2d")
       .createLinearGradient(0, 0, 0, 450);
-
     this.gradient.addColorStop(0, "rgba(247, 149, 0, 0.9)");
     this.gradient.addColorStop(0.5, "rgba(247, 149, 0, 0.25)");
     this.gradient.addColorStop(1, "rgba(247, 149, 0, 0)");

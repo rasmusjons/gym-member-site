@@ -1,8 +1,8 @@
 <template>
   <div>
-    <b-jumbotron fluid class="jumbo" text-variant="white">
-      <h1 class="pulse">
-        SINCE YOU CAN'T BEAT US, <span class="pulse2"> JOIN US! </span>
+    <b-jumbotron fluid class="jumboHome" text-variant="white">
+      <h1 class="pulseHome">
+        SINCE YOU CAN'T BEAT US, <span class="pulse2Home"> JOIN US! </span>
       </h1>
 
       <hr class="my-4" />
@@ -32,8 +32,9 @@ export default {
 
 <style lang="scss" scoped>
 @import "../styles/variables.scss";
+@import "../styles/globalclasses.css";
 
-.pulse {
+.pulseHome {
   animation: pulse 5s;
 }
 
@@ -45,7 +46,7 @@ export default {
     color: white;
   }
 }
-.pulse2 {
+.pulse2Home {
   animation: pulse 10s;
 }
 
@@ -78,7 +79,7 @@ export default {
     transform: translateX(0%);
   }
 }
-.jumbo {
+.jumboHome {
   background: radial-gradient(
     ellipse at center,
     rgba(41, 41, 41, 1) 0%,
