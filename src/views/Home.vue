@@ -2,7 +2,8 @@
   <div>
     <b-jumbotron fluid class="jumboHome" text-variant="white">
       <h1 class="pulseHome">
-        SINCE YOU CAN'T BEAT US, <span class="pulse2Home"> JOIN US! </span>
+        no one knows what it means,
+        <span class="pulse2Home"> but it's provocative! </span>
       </h1>
 
       <hr class="my-4" />
@@ -11,8 +12,7 @@
         class="bokaButton"
         variant="primary"
         @click="$router.push('/boka')"
-        >Boka bana
-        <b-icon class="p-1" icon="calendar3" :display="{ status }"></b-icon
+        >Boka <b-icon class="p-1" icon="calendar3"></b-icon
       ></b-button>
     </b-jumbotron>
     <app-mainbody> </app-mainbody>
@@ -40,7 +40,7 @@ export default {
 
 @keyframes pulse {
   0% {
-    color: black;
+    color: #00a685;
   }
   100% {
     color: white;
@@ -52,10 +52,10 @@ export default {
 
 @keyframes pulse2 {
   0% {
-    color: black;
+    color: #00a685;
   }
   80% {
-    color: black;
+    color: #00a685;
   }
   100% {
     color: white;
@@ -80,12 +80,6 @@ export default {
   }
 }
 .jumboHome {
-  background: radial-gradient(
-    ellipse at center,
-    rgba(41, 41, 41, 1) 0%,
-    rgba(38, 38, 38, 1) 7%,
-    rgba(20, 20, 20, 1) 51%,
-    rgba(0, 0, 0, 1) 100%
-  );
+  background-color: #00a685;
 }
 </style>

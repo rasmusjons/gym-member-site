@@ -6,7 +6,7 @@
         <b-row class="m-1 mt-4 p-1">
           <b-col cols="12">
             <b-img
-              src="http://www.padelcrew.se/wp-content/uploads/2014/10/arenor-bg-1024x363.jpg"
+              src="https://res.cloudinary.com/dk1b2ytfl/image/upload/v1593802389/meghan-holmes-buWcS7G1_28-unsplash_1_lj8yiw.jpg"
               fluid
               alt="Sponsor image"
             ></b-img>
@@ -16,29 +16,6 @@
           <b-col class="mt-1" md="8">
             <b-row class="mt-1 pt-1">
               <b-col md="12" sm="12">
-                <h2>Aktuella ligor</h2>
-
-                <b-button
-                  block
-                  class="mt-4 p-4"
-                  variant="primary"
-                  href="https://ligaspel.se/padelcrew/hpl/tables/"
-                  target="_blank"
-                >
-                  Helsingborg Padel League
-                  <span> - Öppnas i nytt fönster</span>
-                </b-button>
-
-                <b-button
-                  block
-                  class="mt-4 p-4"
-                  variant="primary"
-                  href="https://ligaspel.se/padelcrew/lpl/tables/"
-                  target="_blank"
-                  >Helsingborg Ladies League
-                  <span> - Öppnas i nytt fönster</span></b-button
-                >
-
                 <div>
                   <b-button
                     v-b-toggle.sidebar-backdrop
@@ -101,21 +78,6 @@
                   </b-card-group>
                 </div>
                 <hr />
-              </b-col>
-            </b-row>
-            <b-row class="mt-1 pt-1">
-              <b-col md="12" sm="12">
-                <div>
-                  <b-embed
-                    type="iframe"
-                    allowfullscreen
-                    width="560"
-                    height="315"
-                    src="https://www.youtube.com/embed/zvIIVGV0Ci4"
-                    frameborder="0"
-                    allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-                  ></b-embed>
-                </div>
               </b-col>
             </b-row>
           </b-col>
@@ -223,7 +185,7 @@
 
             <hr />
             <b-img
-              src="http://www.padelcrew.se/wp-content/uploads/2014/10/arena-landskrona-300x150.jpg"
+              src="https://res.cloudinary.com/dk1b2ytfl/image/upload/c_thumb,w_200,g_face/v1593371887/putt_favcu8.png"
               fluid
               alt="Sponsor image2"
             ></b-img>

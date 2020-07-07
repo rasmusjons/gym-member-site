@@ -3,7 +3,7 @@
     <b-carousel
       id="carousel-1"
       v-model="slide"
-      :interval="4000"
+      :interval="0"
       controls
       indicators
       background="#ababab"
@@ -15,19 +15,11 @@
     >
       <!-- Text slides with image -->
       <b-carousel-slide
+        v-for="image in images"
+        :key="image.index"
         caption=""
         text=""
-        img-src="http://www.padelcrew.se/wp-content/uploads/2014/10/padel-bg3-300x164.jpg"
-      ></b-carousel-slide>
-      <b-carousel-slide
-        caption=""
-        text=""
-        img-src="http://www.padelcrew.se/wp-content/uploads/2014/10/padel-bg3-300x164.jpg"
-      ></b-carousel-slide>
-      <b-carousel-slide
-        caption=""
-        text=""
-        img-src="http://www.padelcrew.se/wp-content/uploads/2014/10/padel-bg3-300x164.jpg"
+        :img-src="image"
       ></b-carousel-slide>
     </b-carousel>
   </div>
@@ -35,6 +27,7 @@
 
 <script>
 export default {
+  props: ["images"],
   data() {
     return {
       slide: 0,

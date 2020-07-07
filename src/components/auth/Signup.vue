@@ -103,16 +103,7 @@
                 "
               ></b-form-input>
             </b-form-group>
-            <h2>Lägga till adress? de har det vid tävling...</h2>
-            <b-form-file
-              variant="primary"
-              accept=".jpg, .png"
-              class="rounded shadow-sm mb-1 border border-warning"
-              v-model="form.file"
-              :state="Boolean(form.file)"
-              placeholder="Ladda upp profilbild..."
-              drop-placeholder="Släpp bilden här..."
-            ></b-form-file>
+
             <b-button
               class="mb-1"
               variant="primary"
@@ -149,16 +140,18 @@ export default {
   data() {
     return {
       headlineJumbo: "Registrering",
-      clubs: ["Helsingborg", "Landskrona", "Scandic Nord Arena", "Ängelholm"],
+      clubs: ["Helsingborg", "Lund", "Landskrona", "Malmö"],
       form: {
-        club: "",
+        club: "Malmö",
         email: "rasmus@gmail.com",
-        file: null,
         firstname: "Rasmus",
         lastname: "Jonsson",
         mobile: "123123",
         password1: "123123",
-        password2: "123123"
+        password2: "123123",
+        imageId: null,
+        imageUrl: null,
+        classes: []
       }
     };
   },
@@ -194,14 +187,16 @@ export default {
   },
   methods: {
     onSubmit() {
-      const formData = {
-        email: this.email,
-        password: this.password
-      };
-      this.$store.dispatch("signup", formData);
+      this.$store.dispatch("signup", this.form);
     }
   }
 };
 </script>
 
-<style scoped></style>
+<style lang="scss" scoped>
+@import "../../styles/variables.scss";
+
+.border-warning {
+  border-color: #003441 !important;
+}
+</style>

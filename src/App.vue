@@ -13,7 +13,11 @@ import AppNavbar from "@/components/Navbar.vue";
 import AppFooter from "@/components/Footer.vue";
 
 export default {
-  name: "Home",
+  created() {
+    this.$store.dispatch("tryAutoLogin");
+    this.$store.dispatch("fetchClasses");
+    this.$store.dispatch("fetchNews");
+  },
   components: {
     AppNavbar,
     AppFooter
@@ -36,25 +40,13 @@ export default {
 
 .appNavbar,
 .appFooter {
-  background-color: black;
+  background-color: #00a685;
 }
 
 .appFooter {
   bottom: 0;
 }
-@keyframes grow {
-  0% {
-    border-bottom: rgba(255, 255, 255, 0.3) 2px solid;
-  }
 
-  50% {
-    border-bottom: rgba(255, 255, 255, 0.7) 2px solid;
-  }
-
-  100% {
-    border-bottom: rgba(255, 255, 255, 1) 2px solid;
-  }
-}
 //DENNA COMPONENT SLUT ------->
 
 //ROUTER TRANSITION

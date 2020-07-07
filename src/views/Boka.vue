@@ -4,16 +4,32 @@
 
     <b-container class="container">
       <div class="background">
+        <b-row class="m-1 mt-4 p-1">
+          <b-col cols="12">
+            <b-img
+              src="https://res.cloudinary.com/dk1b2ytfl/image/upload/v1593802389/meghan-holmes-buWcS7G1_28-unsplash_1_lj8yiw.jpg"
+              fluid
+              alt="Sponsor image"
+            ></b-img>
+          </b-col>
+        </b-row>
+      </div>
+
+      <div class="background">
         <b-row v-if="showBooking" class="m-1 p-1">
           <b-col cols="12">
-            <h5>Mina bokningar:</h5>
-            <p>{{ "computed classes" }}</p>
+            <h5>Du har bokat:</h5>
+
+            <p>{{ lastClasses.date }}: {{ lastClasses.time }}</p>
+            <p>Du hittar alla dina bokningar på din profil</p>
           </b-col>
         </b-row>
 
         <b-row class="m-1 p-1">
           <b-col cols="12">
-            <h2>Boka!</h2>
+            <h2 v-if="!isAuthenticated">Logga in för att boka</h2>
+            <h5 v-else>Boka</h5>
+
             <div>
               <label for="example-datepicker">Filtrera på datum</label>
 
@@ -39,17 +55,16 @@
         <b-row v-if="date && !addThreeDays" class="m-1 p-1">
           <b-col sm="12" md="6">
             <div class="bg-light rounded p-3 mt-1">
-              <h5>
-                Lediga tider.
-                <span v-if="isAuthenticated">Logga in för att boka!</span>
-              </h5>
+              <p>
+                {{ addDaysToDate(0) }}
+              </p>
               <b-col cols="12" v-for="time in times" :key="time.index">
                 <b-button
                   variant="primary"
                   class="mt-2"
-                  :disabled="isAuthenticated"
+                  :disabled="!isAuthenticated"
                   @click="onPickTime(addDaysToDate(0), time)"
-                  >Time: {{ time }}
+                  >{{ time }}
                 </b-button>
               </b-col>
             </div>
@@ -61,14 +76,15 @@
           <b-col md="3">
             <div class="bg-light rounded p-3 mt-1">
               <p>{{ addDaysToDate(0) }}</p>
+
               <div v-for="time in times" :key="time.index">
                 <b-button
                   block
                   variant="primary"
                   class="mt-2"
-                  :disabled="isAuthenticated"
+                  :disabled="!isAuthenticated"
                   @click="onPickTime(addDaysToDate(0), time)"
-                  >{{ time }}: Bana A.
+                  >{{ time }}
                 </b-button>
               </div>
             </div>
@@ -81,9 +97,9 @@
                   block
                   variant="primary"
                   class="mt-2"
-                  :disabled="isAuthenticated"
+                  :disabled="!isAuthenticated"
                   @click="onPickTime(addDaysToDate(1), time)"
-                  >{{ time }}: Bana A.
+                  >{{ time }}
                 </b-button>
               </div>
             </div>
@@ -96,9 +112,9 @@
                   block
                   variant="primary"
                   class="mt-2"
-                  :disabled="isAuthenticated"
+                  :disabled="!isAuthenticated"
                   @click="onPickTime(addDaysToDate(2), time)"
-                  >{{ time }}: Bana A.
+                  >{{ time }}
                 </b-button>
               </div>
             </div>
@@ -111,10 +127,10 @@
                   block
                   variant="primary"
                   class="mt-2"
-                  :disabled="isAuthenticated"
+                  :disabled="!isAuthenticated"
                   @click="onPickTime(addDaysToDate(3), time)"
                 >
-                  {{ time }}: Bana A.
+                  {{ time }}
                 </b-button>
               </div>
             </div>
@@ -178,7 +194,12 @@ export default {
       return this.$store.getters.isAuthenticated;
     },
     classes() {
-      return this.$store.getters.user.classes;
+      return this.$store.getters.classes;
+    },
+    lastClasses() {
+      return this.$store.getters.user === null
+        ? false
+        : this.$store.getters.classes[this.$store.getters.classes.length - 1];
     }
   },
   methods: {
@@ -188,43 +209,7 @@ export default {
       console.log(date);
       return moment(date).format("YYYY-MM-DD");
     },
-    getClasses() {
-      //hämtar datum för valt datum samt plus tre dagar.
-      this.addThreeDays = true;
-      if (this.addThreeDays) {
-        const threeDays = 3;
-        const dates = [];
 
-        const date = new Date(this.date);
-
-        //bygger ihop en datum lista med fyra datum.
-        for (let index = 0; index <= threeDays; index++) {
-          dates.push(date.addDays(index));
-        }
-        console.log(dates);
-        // göra fyra anrop.
-        dates.forEach(date => {
-          this.axios
-            .post("http://localhost:3002/users", date)
-            .then(response => {
-              console.log(response);
-            })
-            .catch(error => {
-              console.log(error);
-            });
-        });
-      } else {
-        //hämtar data för valt datum
-        this.axios
-          .post("http://localhost:3002/users")
-          .then(response => {
-            console.log(response);
-          })
-          .catch(error => {
-            console.log(error);
-          });
-      }
-    },
     onPickTime(date, time) {
       this.$bvModal
         .msgBoxConfirm(`Du vill boka: ${date} klockan ${time}`, {
@@ -239,12 +224,17 @@ export default {
           hideHeaderClose: false,
           centered: true
         })
-        .then(() => {
-          // const bookingData = {
-          //   date: this.date,
-          //   time
-          // };
-          // this.$store.dispatch("bookClass", bookingData);
+
+        .then(value => {
+          if (!value) {
+            return;
+          }
+          const bookingData = {
+            date: this.date,
+            time
+          };
+
+          this.$store.dispatch("bookClass", bookingData);
           this.showBookingSuccess = true;
           this.showBooking = true;
           this.makeToast("success");

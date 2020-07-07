@@ -15,12 +15,6 @@ export default {
 @import "../styles/globalclasses.css";
 
 .jumbo {
-  background: radial-gradient(
-    ellipse at center,
-    rgba(41, 41, 41, 1) 0%,
-    rgba(38, 38, 38, 1) 7%,
-    rgba(20, 20, 20, 1) 51%,
-    rgba(0, 0, 0, 1) 100%
-  );
+  background-color: #00a685 !important;
 }
 </style>

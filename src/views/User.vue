@@ -7,7 +7,11 @@
 </template>
 
 <script>
-export default {};
+export default {
+  created() {
+    this.$store.getters.isAuthenticated ? this.$router.push("dashboard") : null;
+  }
+};
 </script>
 
 <style lang="scss" scoped>

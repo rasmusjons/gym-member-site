@@ -24,6 +24,7 @@
                 type="password"
                 v-model="form.password"
                 placeholder="Lösenord"
+                @keyup.enter="onSubmit()"
               ></b-form-input>
             </b-form-group>
 
@@ -83,7 +84,7 @@
         <b-row class="m-1 p-1">
           <b-col cols="12">
             <b-img
-              src="http://www.padelcrew.se/wp-content/uploads/2014/10/arenor-bg-1024x363.jpg"
+              src="https://res.cloudinary.com/dk1b2ytfl/image/upload/v1593371715/basket1_zluevb.png"
               fluid
               alt="Responsive image"
             ></b-img>
@@ -121,8 +122,9 @@ export default {
   methods: {
     onSubmit() {
       const formData = {
-        email: this.email,
-        password: this.password
+        email: this.form.email,
+        password: this.form.password,
+        returnSecureToken: true
       };
       this.$store.dispatch("login", formData);
     },
@@ -166,3 +168,11 @@ export default {
   }
 };
 </script>
+
+<style lang="scss" scoped>
+@import "../../styles/variables.scss";
+
+.border-warning {
+  border-color: #003441 !important;
+}
+</style>

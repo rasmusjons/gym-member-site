@@ -1,16 +1,12 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 
+import Admin from "../views/Admin.vue";
 import Boka from "../views/Boka.vue";
-import Competition from "../views/Competition.vue";
+import About from "../views/About.vue";
 import Dashboard from "../views/Dashboard.vue";
-import Facebook from "../views/Facebook.vue";
 import Home from "../views/Home.vue";
-import Kontakter from "../views/Kontakter.vue";
 import Login from "../components/auth/Login.vue";
-import Regler from "../views/Regler.vue";
-import Priser from "../views/Priser.vue";
-import Skola from "../views/Skola.vue";
 import Signup from "../components/auth/Signup.vue";
 import User from "../views/User.vue";
 
@@ -23,6 +19,11 @@ const routes = [
     component: Home
   },
   {
+    path: "/admin",
+    name: "Admin",
+    component: Admin
+  },
+  {
     path: "/boka",
     name: "Boka",
     component: Boka
@@ -32,42 +33,24 @@ const routes = [
     name: "Dashboard",
     component: Dashboard
   },
+
   {
-    path: "/kontakter",
-    name: "Kontakter",
-    component: Kontakter
+    path: "/info",
+    name: "About",
+    component: About
   },
-  {
-    path: "/tavling",
-    name: "Competition",
-    component: Competition
-  },
-  {
-    path: "/facebook",
-    name: "Facebook",
-    component: Facebook
-  },
-  {
-    path: "/regler",
-    name: "Regler",
-    component: Regler
-  },
-  {
-    path: "/priser",
-    name: "Priser",
-    component: Priser
-  },
-  {
-    path: "/skola",
-    name: "Skola",
-    component: Skola
-  },
+
   {
     path: "/user",
     name: "User",
     component: User,
+
     children: [
-      { path: "", name: "Login", component: Login },
+      {
+        path: "",
+        name: "Login",
+        component: Login
+      },
       { path: "/signup", name: "Signup", component: Signup }
     ]
   }
@@ -79,8 +62,6 @@ const router = new VueRouter({
   routes,
   linkExactActiveClass: "active",
   scrollBehavior(to, from, savedPosition) {
-    console.log(to);
-    console.log(from);
     if (savedPosition) {
       return savedPosition;
     } else {

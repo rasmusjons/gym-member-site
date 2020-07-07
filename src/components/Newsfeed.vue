@@ -1,8 +1,10 @@
 <template>
   <div>
+    <!-- Slicar news med "numberOfNews". Om inget värde skickas in så kommer alla nyhter med. -->
+    <!-- Används just nu bara på startsida för begränsa antalet nyheter. -->
     <b-card
-      v-for="singleNews in news"
-      :key="singleNews.index"
+      v-for="(singleNews, index) in news.slice(0, numberOfNews)"
+      :key="index"
       :title="singleNews.headline"
       :img-src="singleNews.imgurl"
       img-alt="Image"
@@ -15,42 +17,36 @@
         {{ singleNews.content }}
       </b-card-text>
 
-      <b-button href="#" variant="primary">Go somewhere</b-button>
+      <b-button
+        v-if="singleNews.callToAction"
+        :href="singleNews.callToActionLink"
+        target="_blank"
+        variant="primary"
+        >{{ singleNews.callToAction }}</b-button
+      >
     </b-card>
   </div>
 </template>
 
 <script>
 export default {
+  created() {
+    this.$store.dispatch("fetchNews");
+  },
+  props: ["numberOfNews", "newsContent"],
   data() {
-    return {
-      news: [
-        {
-          headline: "Headline!",
-          content: "Lorem ipsum dolor sit amet consectetur adipisicing elit",
-          imgurl:
-            "https://scontent.fmmx1-1.fna.fbcdn.net/v/t1.0-9/104749628_1610242192469040_34100068503082998_n.jpg?_nc_cat=111&_nc_sid=110474&_nc_ohc=mgZlNm9FLbgAX_ifSm2&_nc_ht=scontent.fmmx1-1.fna&oh=d7cd4b3deb3f7dbb43386b1137459d55&oe=5F1BCD0D"
-        },
-        {
-          headline: "Headline2",
-          content: "Lorem ipsum dolor sit amet consectetur adipisicing elit",
-          imgurl:
-            "https://scontent.fmmx1-1.fna.fbcdn.net/v/t1.0-9/94624840_1561136094046317_8959364485978521600_n.jpg?_nc_cat=107&_nc_sid=110474&_nc_ohc=iGSAyHL1AnkAX8ZWkGI&_nc_ht=scontent.fmmx1-1.fna&oh=5a1b9cd06ccd03b6f68ab0b5674c19fe&oe=5F1C1029"
-        },
-        {
-          headline: "Headline3",
-          content: "Lorem ipsum dolor sit amet consectetur adipisicing elit",
-          imgurl:
-            "https://scontent.fmmx1-1.fna.fbcdn.net/v/t1.0-9/104749628_1610242192469040_34100068503082998_n.jpg?_nc_cat=111&_nc_sid=110474&_nc_ohc=mgZlNm9FLbgAX_ifSm2&_nc_ht=scontent.fmmx1-1.fna&oh=d7cd4b3deb3f7dbb43386b1137459d55&oe=5F1BCD0D"
-        },
-        {
-          headline: "Headline4",
-          content: "Lorem ipsum dolor sit amet consectetur adipisicing elit",
-          imgurl:
-            "https://scontent.fmmx1-1.fna.fbcdn.net/v/t1.0-9/94624840_1561136094046317_8959364485978521600_n.jpg?_nc_cat=107&_nc_sid=110474&_nc_ohc=iGSAyHL1AnkAX8ZWkGI&_nc_ht=scontent.fmmx1-1.fna&oh=5a1b9cd06ccd03b6f68ab0b5674c19fe&oe=5F1C1029"
-        }
-      ]
-    };
+    return {};
+  },
+  computed: {
+    news() {
+      let array = [];
+      if (this.$store.getters.news === null) {
+        return array;
+      } else {
+        array.push(this.$store.getters.news);
+        return array.flat();
+      }
+    }
   }
 };
 </script>

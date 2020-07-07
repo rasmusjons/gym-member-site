@@ -11,19 +11,33 @@ export default {
   components: {
     LineChart
   },
-  created() {
-    //hämta lite data :)
-    // this.$store.getters.user.classes
-    this.data = [0, 2, 3, 2, 1, 2, 4];
+  computed: {
+    classes() {
+      return this.$store.getters.classes;
+    }
   },
+
   data() {
     return {
       //data för line-chart. Uppdaters med fillData()
+      chartData: null,
       datacollection: null,
       gradient: null,
-      label: [0, 5, 10, 15, 20, 25, 30],
-      dataLabel: "Spelade matcher senaste månaden",
-      data: null,
+      label: [
+        "Januari",
+        "Februari",
+        "Mars",
+        "April",
+        "Maj",
+        "Juni",
+        "Juli",
+        "Augusti",
+        "September",
+        "Oktober",
+        "November",
+        "December"
+      ],
+      dataLabel: "Bokade pass senaste månaden",
       //options för line-chart
       options: {
         responsive: true,
@@ -42,28 +56,84 @@ export default {
     this.gradient = this.$children[0].$refs.canvas
       .getContext("2d")
       .createLinearGradient(0, 0, 0, 450);
-    this.gradient.addColorStop(0, "rgba(247, 149, 0, 0.9)");
-    this.gradient.addColorStop(0.5, "rgba(247, 149, 0, 0.25)");
-    this.gradient.addColorStop(1, "rgba(247, 149, 0, 0)");
+    this.gradient.addColorStop(0, "rgba(0, 166, 133, 0.9)");
+    this.gradient.addColorStop(0.5, "rgba(0, 166, 133, 0.25)");
+    this.gradient.addColorStop(1, "rgba(0, 166, 133, 0)");
 
-    this.fillData();
+    setTimeout(() => {
+      this.fillData();
+    }, 1000);
   },
   methods: {
     fillData() {
+      this.chartDataMethod();
       this.datacollection = {
         labels: this.label,
         datasets: [
           {
             label: this.dataLabel,
             backgroundColor: this.gradient,
-            data: this.data,
-            borderColor: "rgb(247, 149, 0)",
+            data: this.chartData,
+            borderColor: "rgb(0, 166, 133)",
             pointBackgroundColor: "white",
             borderWidth: 1,
             pointBorderColor: "white"
           }
         ]
       };
+    },
+    chartDataMethod() {
+      const classes = this.classes;
+      const dates = [];
+      for (const key in classes) {
+        dates.push(classes[key].date);
+      }
+
+      let months = [];
+      dates.forEach(date => {
+        const month = date
+          .split("-")
+          .splice(1, 1)
+          .join();
+        months.push(month);
+      });
+
+      const sanitizedMonths = [];
+      months.forEach(month => {
+        const sanitizedMonth = month
+          .split("")
+          .splice(1, 1)
+          .join();
+        sanitizedMonths.push(sanitizedMonth);
+      });
+
+      let counts = {};
+      sanitizedMonths.forEach(month => {
+        counts[month] = (counts[month] || 0) + 1;
+      });
+
+      console.log(counts);
+      let keys = Object.keys(counts);
+      console.log("created -> keys", keys);
+
+      const chartData = [];
+      for (let index = 0; index <= 12; index++) {
+        if (counts[index] !== undefined) {
+          chartData[index - 1] = counts[index];
+        } else {
+          chartData[index] = 0;
+        }
+      }
+      console.log("chartData", chartData);
+
+      this.chartData = chartData;
+    }
+  },
+  watch: {
+    classes: {
+      handler() {
+        this.fillData();
+      }
     }
   }
 };

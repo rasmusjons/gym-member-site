@@ -9,8 +9,17 @@ h2 {
 
 /* BUTTONS */
 .btn-primary {
-  background-color: rgb(247, 149, 0) !important;
-  border-color: rgb(247, 149, 0) !important;
+  background-color: white !important;
+  border-color: #003441 !important;
+  color: #003441 !important; 
+  transition: all 0.2s ease-in-out;
+  text-transform: uppercase !important;
+  letter-spacing: 1.5px !important;
+}
+.btn-secondary {
+  background-color: #FFF3CC !important;
+  border-color: #003441 !important;
+  color: #003441 !important; 
   transition: all 0.2s ease-in-out;
   text-transform: uppercase !important;
   letter-spacing: 1.5px !important;
@@ -35,7 +44,7 @@ h2 {
 /* LINKS */
 .link {
   font-weight: 700;
-  color: rgb(247, 149, 0) !important;
+  color: #003441 !important;
   text-transform: uppercase;
   cursor: pointer;
   transition: all 0.2s ease-in-out;
@@ -64,4 +73,9 @@ h2 {
 .background {
   background-color: #eeeeee7a;
   padding: 10px
+}
+
+
+.pointer {
+  cursor: pointer;
 }

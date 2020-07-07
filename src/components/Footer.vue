@@ -10,22 +10,27 @@
           </p>
         </b-col>
         <b-col cols="4">
-          <img class="img" src="../assets/Facebook.png" />
-          <img class="img" src="../assets/Instagram.png" />
-          <img class="img" src="../assets/LinkedIN.png" />
-          <img class="img" src="../assets/Twitter.png" />
-          <img class="img" src="../assets/Youtube.png" />
+          <img
+            class="img m-1"
+            src="https://res.cloudinary.com/dk1b2ytfl/image/upload/v1593602602/Facebook_ahtlhs.png"
+          />
+          <img
+            class="img m-1"
+            src="https://res.cloudinary.com/dk1b2ytfl/image/upload/v1593602602/LinkedIN_sk45lt.png"
+          />
+          <img
+            class="img m-1"
+            src="https://res.cloudinary.com/dk1b2ytfl/image/upload/v1593602602/Twitter_fueh0d.png"
+          />
+          <img
+            class="img m-1"
+            src="https://res.cloudinary.com/dk1b2ytfl/image/upload/v1593602602/Youtube_sn71mw.png"
+          />
         </b-col>
       </b-row>
       <b-row>
         <b-col cols="8"></b-col>
-        <b-col cols="4">
-          <b-img
-            src="http://www.padelcrew.se/wp-content/uploads/2014/10/padel-crew-logo-long@2x.png"
-            fluid-grow
-            alt="Fluid-grow image"
-          ></b-img>
-        </b-col>
+        <b-col cols="4"> </b-col>
       </b-row>
     </b-container>
   </div>
@@ -41,7 +46,7 @@ export default {
 
 <style scoped>
 .footer {
-  background-color: black;
+  background-color: #00a685;
   color: white;
   height: auto;
   width: 100%;
