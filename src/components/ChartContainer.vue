@@ -112,10 +112,6 @@ export default {
         counts[month] = (counts[month] || 0) + 1;
       });
 
-      console.log(counts);
-      let keys = Object.keys(counts);
-      console.log("created -> keys", keys);
-
       const chartData = [];
       for (let index = 0; index <= 12; index++) {
         if (counts[index] !== undefined) {
@@ -124,7 +120,6 @@ export default {
           chartData[index] = 0;
         }
       }
-      console.log("chartData", chartData);
 
       this.chartData = chartData;
     }

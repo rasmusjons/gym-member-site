@@ -89,7 +89,7 @@
         <b-row class="m-1 p-1">
           <b-col cols="12">
             <b-img
-              src="https://res.cloudinary.com/dk1b2ytfl/image/upload/v1593371715/basket1_zluevb.png"
+              src="https://res.cloudinary.com/dk1b2ytfl/image/upload/c_fill,g_auto,h_250,w_1200/b_rgb:000000,e_gradient_fade,y_-0.50/c_scale,co_rgb:ffffff,fl_relative/v1594115417/gene-jeter-79nVN_Cmj3o-unsplash_tklgjn.jpg"
               fluid
               alt="Responsive image"
             ></b-img>
@@ -141,17 +141,18 @@ export default {
     onResetPassword() {
       console.log(this.resetForm.email);
       this.showsendreseterror = false;
-      const url = "http://localhost:3002/users";
+      const url =
+        "https://identitytoolkit.googleapis.com/v1/accounts:sendOobCode?key=AIzaSyDRXKeC7nBwzeqBzfLBsz19d0AitLBLlds";
 
       axios
         .post(url, {
+          requestType: "PASSWORD_RESET",
           email: this.resetForm.email
         })
         //GREJORNA NEDAN OM OK OCH ERROR ÄR COPY PASTE FRÅN MATCHPLAY ----------->>>>>>>>
         .then(response => {
-          if (response.data.status === "error") {
-            return;
-          } else if (response.data.status === "ok") {
+          console.log(response.status);
+          if (response.status === 200) {
             this.showSendResetSuccess = true;
           } else {
             this.showSendResetError = true;
