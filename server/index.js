@@ -14,7 +14,6 @@ app.use(function(request, response, next) {
 });
 
 app.post("/users", function(req, res) {
-  console.log(req.data);
   res.send();
 });
 

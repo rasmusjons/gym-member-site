@@ -21,7 +21,7 @@
             <b-button
               class="mt-2"
               variant="primary"
-              @click="$router.push('/boka')"
+              @click="handleRouting('/boka')"
               >Gå till bokning <b-icon-calendar3 class="p-1"></b-icon-calendar3
             ></b-button>
             <app-carousel class="mt-4" :images="images0"></app-carousel>
@@ -71,6 +71,15 @@ export default {
         "https://res.cloudinary.com/dk1b2ytfl/image/upload/v1594040426/ryan-de-hamer-WIPIAJW2-P8-unsplash_xcvwyi.jpg"
       ]
     };
+  },
+  methods: {
+    handleRouting(route) {
+      if (this.$router.currentRoute.path === route) {
+        return;
+      } else {
+        this.$router.replace(route);
+      }
+    }
   }
 };
 </script>

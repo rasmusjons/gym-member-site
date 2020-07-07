@@ -8,23 +8,23 @@
 
             <b-collapse id="nav-collapse" is-nav>
               <b-navbar-nav>
-                <b-nav-item class="m-1" @click="$router.push('/')"
+                <b-nav-item class="m-1" @click="handleRouting('/')"
                   >Hem</b-nav-item
                 >
-                <b-nav-item class="m-1" @click="$router.push('/boka')"
+                <b-nav-item class="m-1" @click="handleRouting('/boka')"
                   >Boka</b-nav-item
                 >
 
                 <b-nav-item
                   v-if="isAdmin.admin"
                   class="m-1"
-                  @click="$router.push('/admin')"
+                  @click="handleRouting('/admin')"
                   >Admin</b-nav-item
                 >
 
                 <b-nav-item
                   v-if="isAuthenticated"
-                  @click="$router.push('/dashboard')"
+                  @click="handleRouting('/dashboard')"
                   class="m-1"
                 >
                   Min Sida
@@ -33,7 +33,7 @@
                 <b-nav-item
                   v-if="!isAuthenticated"
                   class="m-1"
-                  @click="$router.push('/user')"
+                  @click="handleRouting('/user')"
                   >Logga in</b-nav-item
                 >
 
@@ -65,6 +65,13 @@ export default {
   methods: {
     onLogout() {
       this.$store.dispatch("logout");
+    },
+    handleRouting(route) {
+      if (this.$router.currentRoute.path === route) {
+        return;
+      } else {
+        this.$router.replace(route);
+      }
     }
   }
 };

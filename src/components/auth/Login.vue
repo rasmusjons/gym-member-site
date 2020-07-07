@@ -41,7 +41,7 @@
                 >Glömt ditt lösenord?</a
               >
               |
-              <a class="link" @click="$router.push('Signup')"
+              <a class="link" @click="handleRouting('Signup')"
                 >Registrera ny användare</a
               >
             </p>
@@ -130,6 +130,13 @@ export default {
     };
   },
   methods: {
+    handleRouting(route) {
+      if (this.$router.currentRoute.path === route) {
+        return;
+      } else {
+        this.$router.replace(route);
+      }
+    },
     onSubmit() {
       const formData = {
         email: this.form.email,
@@ -139,7 +146,6 @@ export default {
       this.$store.dispatch("login", formData);
     },
     onResetPassword() {
-      console.log(this.resetForm.email);
       this.showsendreseterror = false;
       const url =
         "https://identitytoolkit.googleapis.com/v1/accounts:sendOobCode?key=AIzaSyDRXKeC7nBwzeqBzfLBsz19d0AitLBLlds";
@@ -151,7 +157,6 @@ export default {
         })
         //GREJORNA NEDAN OM OK OCH ERROR ÄR COPY PASTE FRÅN MATCHPLAY ----------->>>>>>>>
         .then(response => {
-          console.log(response.status);
           if (response.status === 200) {
             this.showSendResetSuccess = true;
           } else {

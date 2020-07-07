@@ -11,7 +11,7 @@
       <b-button
         class="bokaButton"
         variant="primary"
-        @click="$router.push('/boka')"
+        @click="handleROuting('/boka')"
         >Boka <b-icon class="p-1" icon="calendar3"></b-icon
       ></b-button>
     </b-jumbotron>
@@ -26,6 +26,15 @@ export default {
   name: "Home",
   components: {
     AppMainbody
+  },
+  methods: {
+    handleRouting(route) {
+      if (this.$router.currentRoute.path === route) {
+        return;
+      } else {
+        this.$router.replace(route);
+      }
+    }
   }
 };
 </script>

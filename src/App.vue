@@ -19,6 +19,7 @@ export default {
     this.$store.dispatch("fetchNews");
     const id = localStorage.getItem("fetchUserID");
     this.$store.dispatch("fetchUser", id);
+    this.$store.dispatch("refreshToken");
   },
   components: {
     AppNavbar,

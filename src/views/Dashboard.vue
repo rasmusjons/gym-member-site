@@ -31,7 +31,7 @@
             </p>
             <p v-if="!lastClass">Du har inga kommande bokningar</p>
             <p v-else>{{ lastClass.date }}: {{ lastClass.time }}</p>
-            <b-button variant="primary" @click="$router.push('/boka')">
+            <b-button variant="primary" @click="handleRouting('/boka')">
               <b-icon-plus></b-icon-plus> Boka ny tid
             </b-button>
           </b-col>
@@ -209,6 +209,13 @@ export default {
     }
   },
   methods: {
+    handleRouting(route) {
+      if (this.$router.currentRoute.path === route) {
+        return;
+      } else {
+        this.$router.replace(route);
+      }
+    },
     forceRerender() {
       this.componentKey += 1;
     },
