@@ -24,6 +24,15 @@
         variant="primary"
         >{{ singleNews.callToAction }}</b-button
       >
+      <br />
+      <b-button
+        class="mt-3"
+        v-if="isAdmin.admin"
+        target="_blank"
+        variant="danger"
+        @click="onRemove(singleNews)"
+        >Ta bort</b-button
+      >
     </b-card>
   </div>
 </template>
@@ -46,6 +55,14 @@ export default {
         array.push(this.$store.getters.news);
         return array.flat();
       }
+    },
+    isAdmin() {
+      return !this.$store.getters.user ? false : this.$store.getters.user;
+    }
+  },
+  methods: {
+    onRemove(news) {
+      this.$store.dispatch("removeNews", news.id);
     }
   }
 };

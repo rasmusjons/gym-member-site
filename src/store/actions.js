@@ -92,6 +92,7 @@ export const login = ({ commit, dispatch }, authData) => {
       router.replace("/dashboard").catch(error => console.log(error));
     })
     .catch(error => {
+      commit("loginFailed");
       console.log(error);
     });
 };
@@ -233,4 +234,18 @@ export const fetchNews = ({ commit, state }) => {
       commit("storeNews", news);
     })
     .catch(error => console.log(error));
+};
+
+export const removeNews = ({ state, dispatch }, newsId) => {
+  const url = "https://membersite-21e51.firebaseio.com/news/";
+
+  axios
+    .delete(url + newsId + ".json" + "?auth=" + state.idToken)
+    .then(response => {
+      console.log(response);
+      dispatch("fetchNews");
+    })
+    .catch(error => {
+      console.log(error);
+    });
 };

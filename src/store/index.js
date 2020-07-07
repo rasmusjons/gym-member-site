@@ -13,7 +13,8 @@ export default new Vuex.Store({
     user: null,
     userImage: null,
     classes: null,
-    news: null
+    news: null,
+    loginFailed: false
   },
   mutations: {
     authUser(state, userData) {
@@ -30,6 +31,9 @@ export default new Vuex.Store({
       for (let index = 0; index < keys.length; index++) {
         state.user[keys[index]] = values[index];
       }
+    },
+    loginFailed(state) {
+      state.loginFailed = true;
     },
     clearAuthData(state) {
       state.idToken = null;
@@ -59,6 +63,9 @@ export default new Vuex.Store({
     },
     news(state) {
       return state.news;
+    },
+    getloginFailed(state) {
+      return state.loginFailed;
     }
   }
 });

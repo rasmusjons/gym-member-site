@@ -28,6 +28,11 @@
               ></b-form-input>
             </b-form-group>
 
+            <b-alert variant="danger" v-if="getloginFailed" show
+              >Inloggning misslyckades. Kontrollera e-post och
+              lösenord.</b-alert
+            >
+
             <b-button variant="primary" type="submit" @click="onSubmit"
               >Logga in</b-button
             >
@@ -101,6 +106,11 @@ import axios from "axios";
 import AppJumbo from "../Jumbo.vue";
 
 export default {
+  computed: {
+    getloginFailed() {
+      return this.$store.getters.getloginFailed;
+    }
+  },
   components: {
     AppJumbo
   },

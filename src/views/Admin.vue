@@ -131,6 +131,15 @@
             </b-col>
           </b-row>
         </b-row>
+        <b-row>
+          <b-col class="mt-4" sm="12" md="12">
+            <hr />
+            <h5>Publicerade Nyheter</h5>
+            <div class="mt-4">
+              <AppNewsfeed></AppNewsfeed>
+            </div>
+          </b-col>
+        </b-row>
       </div>
     </b-container>
   </div>
@@ -139,6 +148,7 @@
 <script>
 import AppJumbo from "../components/Jumbo";
 import axios from "axios";
+import AppNewsfeed from "../components/Newsfeed";
 
 export default {
   data: function() {
@@ -167,8 +177,10 @@ export default {
     };
   },
   components: {
-    AppJumbo
+    AppJumbo,
+    AppNewsfeed
   },
+
   methods: {
     changeImage(src, index) {
       this.imageGallery[index] = this.newsContent.imgurl;
@@ -191,6 +203,7 @@ export default {
         .then(response => {
           console.log(response);
           this.published = true;
+          this.$store.dispatch("fetchNews");
         })
         .catch(error => {
           console.log(error);
