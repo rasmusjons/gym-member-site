@@ -3,7 +3,6 @@ import VueRouter from "vue-router";
 
 import Admin from "../views/Admin.vue";
 import Boka from "../views/Boka.vue";
-import About from "../views/About.vue";
 import Dashboard from "../views/Dashboard.vue";
 import Home from "../views/Home.vue";
 import Login from "../components/auth/Login.vue";
@@ -13,6 +12,12 @@ import User from "../views/User.vue";
 Vue.use(VueRouter);
 
 const routes = [
+  //Wild-card route
+  {
+    path: "*",
+    name: "Home",
+    component: Home
+  },
   {
     path: "/",
     name: "Home",
@@ -32,12 +37,6 @@ const routes = [
     path: "/dashboard",
     name: "Dashboard",
     component: Dashboard
-  },
-
-  {
-    path: "/info",
-    name: "About",
-    component: About
   },
 
   {

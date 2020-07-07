@@ -5,6 +5,7 @@
         <b-row class="m-1 p-1">
           <b-col sm="12" md="6" class="mt-4" v-if="user">
             <b-img
+              :key="componentKey"
               v-if="user.imageId"
               class="mt-4 mb-2"
               :src="
@@ -174,6 +175,7 @@ export default {
   },
   data() {
     return {
+      componentKey: 0,
       file: null,
       newImage: true,
 
@@ -208,6 +210,7 @@ export default {
   },
   methods: {
     forceRerender() {
+      console.log("forece");
       this.componentKey += 1;
     },
     onCancel(date, time, id) {
@@ -240,11 +243,6 @@ export default {
           const imageId = response.data.public_id;
           const imageUrl = response.data.secure_url;
           this.$store.dispatch("updateUser", { imageUrl, imageId });
-        })
-        .then(() => {
-          setTimeout(() => {
-            this.forceRerender();
-          }, 3000);
         })
         .catch(error => {
           console.log(error);

@@ -131,6 +131,7 @@ export const signup = ({ commit, dispatch }, formData) => {
       router.replace("/dashboard").catch(error => console.log(error));
     })
     .catch(error => {
+      commit("loginFailed");
       console.log(error);
     });
 };
@@ -144,6 +145,7 @@ export const storeUser = ({ state, dispatch }, userData) => {
     .then(response => {
       const fetchUserID = response.data.name;
       localStorage.setItem("fetchUserID", fetchUserID);
+
       dispatch("fetchUser", fetchUserID);
     })
     .catch(error => {
@@ -156,6 +158,8 @@ export const fetchUser = ({ commit, state }, identification) => {
   if (!state.idToken) {
     return;
   }
+
+  console.log(identification);
   axios
     .get(url + "?auth=" + state.idToken)
     .then(response => {
@@ -167,11 +171,14 @@ export const fetchUser = ({ commit, state }, identification) => {
         users.push(user);
       }
 
+      let lastId = null;
       users.forEach(id => {
         if (id.id === identification || id.email === identification) {
-          commit("storeUserMutation", id);
+          lastId = id;
         }
       });
+      console.log(lastId);
+      commit("storeUserMutation", lastId);
     })
     .catch(error => {
       commit("clearAuthData");
@@ -196,10 +203,12 @@ export const tryAutoLogin = ({ commit, dispatch }) => {
     userId: userId
   });
   const id = localStorage.getItem("fetchUserID");
+
   dispatch("fetchUser", id);
 };
 
 export const updateUser = ({ commit, state }, updateData) => {
+  console.log("update user");
   const url = "https://membersite-21e51.firebaseio.com/user.json";
 
   const userData = { ...state.user, ...updateData };

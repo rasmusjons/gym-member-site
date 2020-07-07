@@ -42,21 +42,7 @@
               ></b-form-input
             ></b-form-group>
 
-            <b-form-group id="input-group-4" label="Mobilnummer">
-              <b-form-input
-                class="rounded shadow-sm  border border-warning"
-                v-model="form.mobile"
-                placeholder="Mobilnummer"
-                @input="$v.form.mobile.$touch"
-                :state="$v.form.mobile.$dirty ? !$v.form.mobile.$error : null"
-              ></b-form-input
-            ></b-form-group>
-
-            <b-form-group
-              id="input-group-5"
-              label="Anläggning:"
-              description="Välj din favoritanläggning så att vi kan skräddarsy innehållet på sidan åt dig"
-            >
+            <b-form-group id="input-group-5" label="Träningsort:">
               <b-form-radio
                 v-for="(club, index) in clubs"
                 :key="club.index"
@@ -112,9 +98,11 @@
               @click="onSubmit"
               >Registrera</b-button
             >
+            <b-alert class="mt-4" variant="danger" show v-if="loginfailed"
+              >Inloggning misslyckades</b-alert
+            >
           </b-col>
         </b-row>
-
         <!-- VALIDATE OBJECTET: -->
         <p hidden>{{ $v.form.club }}</p>
       </div>
@@ -123,17 +111,16 @@
 </template>
 
 <script>
-import {
-  required,
-  email,
-  sameAs,
-  minLength,
-  numeric
-} from "vuelidate/lib/validators";
+import { required, email, sameAs, minLength } from "vuelidate/lib/validators";
 
 import AppJumbo from "../Jumbo";
 
 export default {
+  computed: {
+    loginfailed() {
+      return this.$store.getters.getloginFailed;
+    }
+  },
   components: {
     AppJumbo
   },
@@ -142,15 +129,15 @@ export default {
       headlineJumbo: "Registrering",
       clubs: ["Helsingborg", "Lund", "Landskrona", "Malmö"],
       form: {
-        club: "Malmö",
-        email: "rasmus@gmail.com",
-        firstname: "Rasmus",
-        lastname: "Jonsson",
-        mobile: "123123",
-        password1: "123123",
-        password2: "123123",
-        imageId: null,
-        imageUrl: null,
+        club: null,
+        email: null,
+        firstname: null,
+        lastname: null,
+        password1: null,
+        password2: null,
+        imageId: "user_eavri5",
+        imageUrl:
+          "https://res.cloudinary.com/dk1b2ytfl/image/upload/v1594121341/user_eavri5_du7q9w.jpg",
         classes: []
       }
     };
@@ -171,10 +158,6 @@ export default {
       lastname: {
         required,
         minLength: minLength(2)
-      },
-      mobile: {
-        required,
-        numeric
       },
       password1: {
         required,

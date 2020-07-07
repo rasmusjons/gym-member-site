@@ -84,6 +84,7 @@ export default {
     },
     chartDataMethod() {
       const classes = this.classes;
+
       const dates = [];
       for (const key in classes) {
         dates.push(classes[key].date);
