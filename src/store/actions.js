@@ -8,8 +8,7 @@ export const bookClass = ({ state, dispatch }, bookingData) => {
 
   axios
     .post(url + "?auth=" + state.idToken, data)
-    .then(response => {
-      console.log(response);
+    .then(() => {
       dispatch("fetchClasses");
     })
     .catch(error => {
@@ -22,8 +21,7 @@ export const cancelClass = ({ state, dispatch }, bookingId) => {
 
   axios
     .delete(url + bookingId + ".json" + "?auth=" + state.idToken)
-    .then(response => {
-      console.log(response);
+    .then(() => {
       dispatch("fetchClasses");
     })
     .catch(error => {
@@ -54,7 +52,6 @@ export const fetchClasses = ({ commit, state }) => {
           classList.push(aClass);
         }
       });
-      console.log("classes", classList);
       commit("storeClasses", classList);
     })
     .catch(error => console.log(error));
@@ -159,7 +156,6 @@ export const fetchUser = ({ commit, state }, identification) => {
     return;
   }
 
-  console.log(identification);
   axios
     .get(url + "?auth=" + state.idToken)
     .then(response => {
@@ -177,7 +173,6 @@ export const fetchUser = ({ commit, state }, identification) => {
           lastId = id;
         }
       });
-      console.log(lastId);
       commit("storeUserMutation", lastId);
     })
     .catch(error => {
@@ -208,14 +203,12 @@ export const tryAutoLogin = ({ commit, dispatch }) => {
 };
 
 export const updateUser = ({ commit, state }, updateData) => {
-  console.log("update user");
   const url = "https://membersite-21e51.firebaseio.com/user.json";
 
   const userData = { ...state.user, ...updateData };
   axios
     .post(url + "?auth=" + state.idToken, userData)
-    .then(response => {
-      console.log(response);
+    .then(() => {
       commit("updateUserInStore", updateData);
     })
     .catch(error => {
@@ -250,8 +243,7 @@ export const removeNews = ({ state, dispatch }, newsId) => {
 
   axios
     .delete(url + newsId + ".json" + "?auth=" + state.idToken)
-    .then(response => {
-      console.log(response);
+    .then(() => {
       dispatch("fetchNews");
     })
     .catch(error => {

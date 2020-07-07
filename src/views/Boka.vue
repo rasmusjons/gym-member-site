@@ -20,7 +20,9 @@
           <b-col cols="12">
             <h5>Du har bokat:</h5>
 
-            <p>{{ lastClasses.date }}: {{ lastClasses.time }}</p>
+            <p v-if="lastClasses">
+              {{ lastClasses.date }}: {{ lastClasses.time }}
+            </p>
             <p>Du hittar alla dina bokningar på din profil</p>
           </b-col>
         </b-row>
@@ -206,7 +208,6 @@ export default {
     addDaysToDate(days) {
       const dateTemp = new Date(this.date);
       const date = dateTemp.addDays(days);
-      console.log(date);
       return moment(date).format("YYYY-MM-DD");
     },
 

@@ -18,7 +18,6 @@ export default {
     this.$store.dispatch("fetchClasses");
     this.$store.dispatch("fetchNews");
     const id = localStorage.getItem("fetchUserID");
-
     this.$store.dispatch("fetchUser", id);
   },
   components: {

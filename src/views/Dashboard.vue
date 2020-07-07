@@ -210,7 +210,6 @@ export default {
   },
   methods: {
     forceRerender() {
-      console.log("forece");
       this.componentKey += 1;
     },
     onCancel(date, time, id) {

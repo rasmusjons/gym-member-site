@@ -200,8 +200,7 @@ export default {
 
       axios
         .post(url + "?auth=" + userID, data)
-        .then(response => {
-          console.log(response);
+        .then(() => {
           this.published = true;
           this.$store.dispatch("fetchNews");
         })
