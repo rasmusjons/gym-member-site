@@ -22,7 +22,6 @@
                   rows="1"
                   max-rows="1"
                 ></b-form-textarea>
-                {{ newsContent.headline }}
                 <label for="content">Din text:</label>
 
                 <b-form-textarea
