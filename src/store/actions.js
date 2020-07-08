@@ -86,7 +86,11 @@ export const login = ({ commit, dispatch }, authData) => {
       dispatch("fetchUser", authData.email);
       dispatch("setLogoutTimer", response.data.expiresIn);
 
-      router.replace("/dashboard").catch(error => console.log(error));
+      if (router.currentRoute.path === "/dashboard") {
+        return;
+      } else {
+        router.replace("/dashboard").catch(error => console.log(error));
+      }
     })
     .catch(error => {
       commit("loginFailed");
@@ -99,7 +103,11 @@ export const logout = ({ commit }) => {
   localStorage.removeItem("expirationDate");
   localStorage.removeItem("token");
   localStorage.removeItem("userId");
-  router.replace("/user").catch(error => console.log(error));
+  if (router.currentRoute.path === "/user") {
+    return;
+  } else {
+    router.replace("/user").catch(error => console.log(error));
+  }
 };
 
 export const signup = ({ commit, dispatch }, formData) => {
@@ -125,7 +133,12 @@ export const signup = ({ commit, dispatch }, formData) => {
       localStorage.setItem("token", response.data.idToken);
       localStorage.setItem("userId", response.data.localId);
       localStorage.setItem("expirationDate", expirationDate);
-      router.replace("/dashboard").catch(error => console.log(error));
+
+      if (router.currentRoute.path === "/dashboard") {
+        return;
+      } else {
+        router.replace("/dashboard").catch(error => console.log(error));
+      }
     })
     .catch(error => {
       commit("loginFailed");
