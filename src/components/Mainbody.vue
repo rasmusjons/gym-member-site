@@ -4,18 +4,19 @@
       <div class="background">
         <b-row class="m-1 p-1">
           <b-col md="6" sm="12">
-            <h2>Välkommen</h2>
+            <h2 class="mt-4">Skapa användare för boka träning</h2>
             <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Iure ut
-              aliquam atque tempore labore saepe dignissimos perferendis facilis
-              quod. Tempora dolore tempore accusantium quaerat libero sit nam
-              cupiditate repudiandae dignissimos?
+              På denna sida måste du skapa en användare för att boka ett
+              träningspass. På boka kan du söka på träningspass efter datum
+              eller välja att söka flexibelt med den egenutvecklare flexibla
+              sökningen. På "Min sida" kan du se dina träningspass, avboka, se
+              din träningsstatistik samt uppdatera din profil-info och bild.
             </p>
             <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Iure ut
-              aliquam atque tempore labore saepe dignissimos perferendis facilis
-              quod. Tempora dolore tempore accusantium quaerat libero sit nam
-              cupiditate repudiandae dignissimos?
+              Som admin kan du lägga upp nyheter (admin@admin.com och lösenord
+              admin123). Med det egenbyggda publiceringsverktyget kan du välja
+              bilder från en enklare bildbank och skapa nyheter som publiceras
+              på alla användares "Min sida".
             </p>
 
             <b-button
@@ -32,17 +33,13 @@
               :images="images1"
             ></app-carousel>
 
-            <h2 class="mt-4">Skapa användare för boka träning</h2>
+            <h2 class="mt-4">Teknisk info</h2>
             <p>
-              På denna sida måste du skapa en användare för att boka ett
-              träningspass. Du kan även ta del av den träning och uppdatera din
-              profil på "Min sida"
-            </p>
-            <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Iure ut
-              aliquam atque tempore labore saepe dignissimos perferendis facilis
-              quod. Tempora dolore tempore accusantium quaerat libero sit nam
-              cupiditate repudiandae dignissimos?
+              Appen är byggd i Vue med en Firebase backend. Cloduinary används
+              för hantera bilder och Vuevalidation för form-validering. Chartjs
+              används för skapa stapeldiagrammet på "Min sida". Sidan har
+              medvetet totalt ca 100 rader css och scss, utan lutar sig istället
+              starkt mot Bootstrap.
             </p>
           </b-col>
         </b-row>
