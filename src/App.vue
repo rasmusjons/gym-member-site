@@ -15,7 +15,6 @@ import AppFooter from "@/components/Footer.vue";
 export default {
   created() {
     this.$store.dispatch("tryAutoLogin");
-    this.$store.dispatch("fetchClasses");
     this.$store.dispatch("fetchNews");
     const id = localStorage.getItem("fetchUserEmail");
     this.$store.dispatch("fetchUser", id);
