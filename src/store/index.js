@@ -38,6 +38,9 @@ export default new Vuex.Store({
     clearAuthData(state) {
       state.idToken = null;
       state.userId = null;
+      state.user = null;
+      state.userImage = null;
+      state.classes = null;
       router.push("/user");
     },
     storeClasses(state, classes) {

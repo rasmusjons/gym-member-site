@@ -3,7 +3,7 @@ import router from "../router/index";
 
 export const bookClass = ({ state, dispatch }, bookingData) => {
   const url = "https://membersite-21e51.firebaseio.com/classes.json";
-  const userID = localStorage.getItem("fetchUserID");
+  const userID = localStorage.getItem("fetchUserEmail");
   const data = { userID, ...bookingData };
 
   axios
@@ -34,7 +34,7 @@ export const fetchClasses = ({ commit, state }) => {
   if (!state.idToken) {
     return;
   }
-  const userID = localStorage.getItem("fetchUserID");
+  const userID = localStorage.getItem("fetchUserEmail");
   axios
     .get(url + "?auth=" + state.idToken)
     .then(response => {
@@ -48,6 +48,8 @@ export const fetchClasses = ({ commit, state }) => {
 
       let classList = [];
       classes.forEach(aClass => {
+        console.log(aClass.userID);
+        console.log(userID);
         if (aClass.userID === userID) {
           classList.push(aClass);
         }
@@ -80,7 +82,7 @@ export const login = ({ commit, dispatch }, authData) => {
       const expirationDate = new Date(now.getTime() + response.data.expiresIn);
       localStorage.setItem("token", response.data.idToken);
       localStorage.setItem("userId", response.data.localId);
-      localStorage.setItem("fetchUserID", authData.email);
+      localStorage.setItem("fetchUserEmail", authData.email);
       localStorage.setItem("expirationDate", expirationDate);
 
       dispatch("fetchUser", authData.email);
@@ -103,6 +105,8 @@ export const logout = ({ commit }) => {
   localStorage.removeItem("expirationDate");
   localStorage.removeItem("token");
   localStorage.removeItem("userId");
+  localStorage.removeItem("fetchUserEmail");
+  localStorage.removeItem("fetchUserId");
   if (router.currentRoute.path === "/user") {
     return;
   } else {

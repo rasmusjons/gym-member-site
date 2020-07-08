@@ -169,6 +169,9 @@ import ChartContainer from "../components/ChartContainer.vue";
 import axios from "axios";
 
 export default {
+  created() {
+    this.$store.dispatch("fetchClasses");
+  },
   components: {
     AppNewsfeed,
     ChartContainer
